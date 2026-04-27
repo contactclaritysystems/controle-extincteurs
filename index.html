@@ -447,16 +447,16 @@ function render() {
     if (!sorted.length) { c.innerHTML = empty("🗂️", "Aucun historique", "Les vérifications effectuées apparaîtront ici."); return; }
     c.innerHTML += '<div class="slabel">Terminées</div>';
     sorted.forEach((item, i) => {
-      c.innerHTML += `<div class="card ok" style="animation-delay:${i*.04}s">
-        <div class="icon">✅</div>
-        <div class="info">
-<div class="cname">${item.entreprise || ""} · ${item.name || ""}</div>
-<div class="cdate">${fmtDate(item.date)} · ${fmtHeure(item.date)}</div>
-<div class="cdate">${getAdresseSansCP(item.adresse)}</div>
-<div class="cdate">${getCodePostalVille(item.adresse)}</div>
-        </div>
-      </div>`;
-    });
+  c.innerHTML += `<div class="card ok" style="animation-delay:${i*.04}s">
+    <div class="icon">✅</div>
+    <div class="info">
+      <div class="cname">${[item.entreprise, item.name].filter(Boolean).join(" · ")}</div>
+      <div class="cdate">${fmtDate(item.date)} · ${fmtHeure(item.date)}</div>
+      <div class="cdate">${getAdresseSansCP(item.adresse)}</div>
+      <div class="cdate">${getCodePostalVille(item.adresse)}</div>
+    </div>
+  </div>`;
+});
   }
 }
 

@@ -434,7 +434,7 @@ function render() {
 
   } else if (currentTab === "planning") {
     const sorted = [...items].sort((a,b) => new Date(a.date)-new Date(b.date));
-    if (!sorted.length) { c.innerHTML = empty("📅", "Planning vide", "Aucune vérification planifiée."); return; }
+    if (!sorted.length) { c.innerHTML = empty("📅", "Planning vide", "Aucun RDV planifié."); return; }
     c.innerHTML += '<div class="slabel">À venir</div>';
     sorted.forEach((item, i) => {
       const d = midnight(item.date);

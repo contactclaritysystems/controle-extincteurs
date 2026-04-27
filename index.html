@@ -447,7 +447,6 @@ function render() {
     if (!sorted.length) { c.innerHTML = empty("🗂️", "Aucun historique", "Les vérifications effectuées apparaîtront ici."); return; }
     c.innerHTML += '<div class="slabel">Terminées</div>';
     sorted.forEach((item, i) => {
-      const u = item.user ? ` · ${item.user}` : "";
       c.innerHTML += `<div class="card ok" style="animation-delay:${i*.04}s">
         <div class="icon">✅</div>
         <div class="info">

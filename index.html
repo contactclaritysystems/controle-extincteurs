@@ -451,8 +451,10 @@ function render() {
       c.innerHTML += `<div class="card ok" style="animation-delay:${i*.04}s">
         <div class="icon">✅</div>
         <div class="info">
-          <div class="cname">${item.name}</div>
-          <div class="cdate">${fmt(item.date)}${u}</div>
+          <div class="cname">${item.societe} · ${item.contact}</div>
+<div class="cdate">${item.date} · ${item.heure}${u}</div>
+<div class="cdate">${item.adresse}</div>
+<div class="cdate">${item.code_postal} ${item.ville}</div>
         </div>
       </div>`;
     });
@@ -464,9 +466,11 @@ function card(item, idx, cls, btn = true) {
   return `<div class="card ${cls}" id="card-${item.id}" style="animation-delay:${idx*.04}s">
     <div class="icon">${ico}</div>
     <div class="info">
-      <div class="cname">${item.name}</div>
-      <div class="cdate">${fmt(item.date)}</div>
-    </div>
+  <div class="cname">${item.societe} · ${item.contact}</div>
+  <div class="cdate">${item.date} · ${item.heure}</div>
+  <div class="cdate">${item.adresse}</div>
+  <div class="cdate">${item.code_postal} ${item.ville}</div>
+</div>
     ${btn ? `<button class="vbtn" onclick="openSheet('${item.id}','${item.name.replace(/'/g,"\\'")}')">Valider</button>` : ""}
   </div>`;
 }

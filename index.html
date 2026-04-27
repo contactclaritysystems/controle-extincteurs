@@ -464,9 +464,20 @@ function displayName(item) {
 }
 
 function fmtFull(item) {
-  const dateTxt = fmt(item.date);
-  const heure = item.heure || item.time || item.start_time || "";
-  return heure ? `${dateTxt} · ${heure}` : dateTxt;
+  const d = new Date(item.date);
+  const dateTxt = d.toLocaleDateString("fr-FR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long"
+  });
+
+  const heureTxt = d.toLocaleTimeString("fr-FR", {
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+
+  const finalDate = dateTxt.charAt(0).toUpperCase() + dateTxt.slice(1);
+  return `${finalDate} · ${heureTxt}`;
 }
 
 function card(item, idx, cls, btn = true) {

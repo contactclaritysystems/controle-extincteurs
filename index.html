@@ -470,15 +470,17 @@ function fmtFull(item) {
 }
 
 function card(item, idx, cls, btn = true) {
-  const ico = cls === "red" ? "⚠️" : cls === "orange" ? "🔔" : "📋";
-  return `<div class="card ${cls}" id="card-${item.id}" style="animation-delay:${idx*.04}s">
-    <div class="icon">${ico}</div>
-    <div class="info">
-      <div class="cname">${item.name}</div>
-      <div class="cdate">${fmt(item.date)}</div>
-    </div>
-    ${btn ? `<button class="vbtn" onclick="openSheet('${item.id}','${item.name.replace(/'/g,"\\'")}')">Valider</button>` : ""}
-  </div>`;
+  const ico = cls === "red" ? "⚠️" : cls === "orange" ? "🔔" : "📋";
+  const name = displayName(item);
+
+  return `<div class="card ${cls}" id="card-${item.id}" style="animation-delay:${idx*.04}s">
+    <div class="icon">${ico}</div>
+    <div class="info">
+      <div class="cname">${name}</div>
+      <div class="cdate">${fmtFull(item)}</div>
+    </div>
+    ${btn ? `<button class="vbtn" onclick="openSheet('${item.id}','${name.replace(/'/g,"\\'")}')">Valider</button>` : ""}
+  </div>`;
 }
 
 function empty(ico, title, sub = "") {

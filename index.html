@@ -459,6 +459,16 @@ function render() {
   }
 }
 
+function displayName(item) {
+  return item.societe || item.company || item.entreprise || item.name || item.email || "Client";
+}
+
+function fmtFull(item) {
+  const dateTxt = fmt(item.date);
+  const heure = item.heure || item.time || item.start_time || "";
+  return heure ? `${dateTxt} · ${heure}` : dateTxt;
+}
+
 function card(item, idx, cls, btn = true) {
   const ico = cls === "red" ? "⚠️" : cls === "orange" ? "🔔" : "📋";
   return `<div class="card ${cls}" id="card-${item.id}" style="animation-delay:${idx*.04}s">

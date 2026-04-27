@@ -521,10 +521,10 @@ function card(item, idx, cls, btn = true) {
 
     <div class="info">
       <div class="cname">${name}</div>
-      <div class="cdate">${fmtFull(item)}</div>
+     <div class="cdate" style="margin-bottom:2px">${fmtFull(item)}</div>
 
-      ${adr1 ? `<div class="cdate" style="font-size:11px;opacity:.7">${capitalize(adr1)}</div>` : ""}
-      ${adr2 ? `<div class="cdate" style="font-size:11px;opacity:.7">${capitalize(adr2)}</div>` : ""}
+${adr1 ? `<div class="cdate" style="font-size:11px;opacity:.7;line-height:1.2">${capitalize(adr1)}</div>` : ""}
+${adr2 ? `<div class="cdate" style="font-size:11px;opacity:.7;line-height:1.2;margin-top:-2px">${capitalize(adr2)}</div>` : ""}
     </div>
 
     ${btn ? `<button class="vbtn" onclick="openSheet('${item.id}','${name.replace(/'/g,"\\'")}')">Valider</button>` : ""}

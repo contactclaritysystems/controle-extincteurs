@@ -471,11 +471,11 @@ function card(item, idx, cls, btn = true) {
   </div>`;
 }
 
-function empty(ico, title, sub) {
+function empty(ico, title, sub = "") {
   return `<div class="empty">
     <div class="empty-ico">${ico}</div>
     <div class="empty-title">${title}</div>
-    <div class="empty-sub">${sub}</div>
+    ${sub ? `<div class="empty-sub">${sub}</div>` : ""}
   </div>`;
 }
 

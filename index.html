@@ -514,13 +514,19 @@ function card(item, idx, cls, btn = true) {
   const ico = cls === "red" ? "⚠️" : cls === "orange" ? "🔔" : "📋";
   const name = displayName(item);
 
+  const [adr1, adr2] = splitAdresse(item.adresse);
+
   return `<div class="card ${cls}" id="card-${item.id}" style="animation-delay:${idx*.04}s">
     <div class="icon">${ico}</div>
-   <div class="info">
-  <div class="cname">${name}</div>
-  <div class="cdate">${fmtFull(item)}</div>
-  ${item.adresse ? `<div class="cdate" style="font-size:11px;opacity:.7">${item.adresse}</div>` : ""}
-</div>
+
+    <div class="info">
+      <div class="cname">${name}</div>
+      <div class="cdate">${fmtFull(item)}</div>
+
+      ${adr1 ? `<div class="cdate" style="font-size:11px;opacity:.7">${capitalize(adr1)}</div>` : ""}
+      ${adr2 ? `<div class="cdate" style="font-size:11px;opacity:.7">${capitalize(adr2)}</div>` : ""}
+    </div>
+
     ${btn ? `<button class="vbtn" onclick="openSheet('${item.id}','${name.replace(/'/g,"\\'")}')">Valider</button>` : ""}
   </div>`;
 }

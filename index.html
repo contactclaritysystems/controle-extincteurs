@@ -417,7 +417,7 @@ function render() {
   if (currentTab === "today") {
     const all = items.filter(i => midnight(i.date) <= today);
     if (!all.length) {
-      c.innerHTML = empty("✅", "Tout est à jour", "Aucune vérification en attente.");
+      c.innerHTML = empty("✅", "Aucun RDV pour aujourd'hui");
       return;
     }
     const late  = all.filter(i => midnight(i.date) < today);

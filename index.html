@@ -470,8 +470,12 @@ function card(item, idx, cls, btn = true) {
   <div class="cdate">${getAdresseSansCP(item.adresse)}</div>
   <div class="cdate">${getCodePostalVille(item.adresse)}</div>
 </div>
-    ${btn ? `<button class="vbtn" onclick="openSheet('${item.id}','${item.name.replace(/'/g,"\\'")}')">Valider</button>` : ""}
-  </div>`;
+  ${btn ? `
+  <div style="display:flex; flex-direction:column; gap:8px;">
+    <button class="vbtn" onclick="openSheet('${item.id}','${item.name.replace(/'/g,"\\'")}')">Valider</button>
+    <button class="vbtn" style="background:#34C759;" onclick="openMaps('${item.adresse || ""}')">Maps</button>
+  </div>
+` : ""}
 }
 
 function empty(ico, title, sub) {
@@ -545,6 +549,11 @@ function getCodePostalVille(adresse) {
   const str = String(adresse || "");
   const match = str.match(/(\d{5})\s+(.+)$/);
   return match ? `${match[1]} ${match[2]}` : "";
+}
+
+  function openMaps(adresse) {
+  const url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(adresse);
+  window.open(url, "_blank");
 }
 
 loadData();

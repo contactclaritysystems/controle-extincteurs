@@ -489,7 +489,7 @@ function fmtFull(item) {
   return `${finalDate} · ${heureTxt}`;
 }
 
-  function capitalize(str) {
+function capitalize(str) {
   if (!str) return "";
   return String(str).charAt(0).toUpperCase() + String(str).slice(1);
 }
@@ -508,15 +508,6 @@ function splitAdresse(adresse) {
   const ligne2 = parts.slice(cpIndex).join(" ");
 
   return [ligne1, ligne2];
-}
-
-  const heureTxt = d.toLocaleTimeString("fr-FR", {
-    hour: "2-digit",
-    minute: "2-digit"
-  });
-
-  const finalDate = dateTxt.charAt(0).toUpperCase() + dateTxt.slice(1);
-  return `${finalDate} · ${heureTxt}`;
 }
 
 function card(item, idx, cls, btn = true) {

@@ -453,8 +453,9 @@ function render() {
         <div class="info">
           <div class="cname">${item.societe} · ${item.contact}</div>
 <div class="cname">${item.entreprise || ""} · ${item.name || ""}</div>
-<div class="cdate">${fmtDate(item.date)} · ${fmtHeure(item.date)}${u}</div>
-<div class="cdate">${item.adresse || ""}</div>
+<div class="cdate">${fmtDate(item.date)} · ${fmtHeure(item.date)}</div>
+<div class="cdate">${getAdresseSansCP(item.adresse)}</div>
+<div class="cdate">${getCodePostalVille(item.adresse)}</div>
         </div>
       </div>`;
     });
@@ -468,7 +469,8 @@ function card(item, idx, cls, btn = true) {
     <div class="info">
   <div class="cname">${item.entreprise || ""} · ${item.name || ""}</div>
   <div class="cdate">${fmtDate(item.date)} · ${fmtHeure(item.date)}</div>
-  <div class="cdate">${item.adresse || ""}</div>
+  <div class="cdate">${getAdresseSansCP(item.adresse)}</div>
+  <div class="cdate">${getCodePostalVille(item.adresse)}</div>
 </div>
     ${btn ? `<button class="vbtn" onclick="openSheet('${item.id}','${item.name.replace(/'/g,"\\'")}')">Valider</button>` : ""}
   </div>`;
@@ -534,6 +536,17 @@ function fmtHeure(str) {
     hour: "2-digit",
     minute: "2-digit"
   });
+}
+
+  function getAdresseSansCP(adresse) {
+  const str = String(adresse || "");
+  return str.replace(/\s+\d{5}\s+.+$/i, "");
+}
+
+function getCodePostalVille(adresse) {
+  const str = String(adresse || "");
+  const match = str.match(/(\d{5})\s+(.+)$/);
+  return match ? `${match[1]} ${match[2]}` : "";
 }
 
 loadData();

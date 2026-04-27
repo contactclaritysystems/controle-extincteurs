@@ -446,17 +446,19 @@ function render() {
     const sorted = [...hist].sort((a,b) => new Date(b.date)-new Date(a.date));
     if (!sorted.length) { c.innerHTML = empty("🗂️", "Aucun historique", "Les vérifications effectuées apparaîtront ici."); return; }
     c.innerHTML += '<div class="slabel">Terminées</div>';
-    sorted.forEach((item, i) => {
-      const u = item.user ? ` · ${item.user}` : "";
-      c.innerHTML += `<div class="card ok" style="animation-delay:${i*.04}s">
-        <div class="icon">✅</div>
-        <div class="info">
-          <div class="cname">${displayName(item)}</div>
-<div class="cdate">${fmtFull(item)}${u}</div>
-${item.adresse ? `<div class="cdate" style="font-size:11px;opacity:.7">${item.adresse}</div>` : ""}
-        </div>
-      </div>`;
-    });
+   sorted.forEach((item, i) => {
+  const [adr1, adr2] = splitAdresse(item.adresse);
+
+  c.innerHTML += `<div class="card ok" style="animation-delay:${i*.04}s">
+    <div class="icon">✅</div>
+    <div class="info">
+      <div class="cname">${capitalize(item.societe)} · ${capitalize(item.contact)}</div>
+      <div class="cdate">${fmtFull(item)}</div>
+      ${adr1 ? `<div class="cdate" style="font-size:11px;opacity:.7">${capitalize(adr1)}</div>` : ""}
+      ${adr2 ? `<div class="cdate" style="font-size:11px;opacity:.7">${capitalize(adr2)}</div>` : ""}
+    </div>
+  </div>`;
+});
   }
 }
 
@@ -485,6 +487,27 @@ function fmtFull(item) {
 
   const finalDate = dateTxt.charAt(0).toUpperCase() + dateTxt.slice(1);
   return `${finalDate} · ${heureTxt}`;
+}
+
+  function capitalize(str) {
+  if (!str) return "";
+  return String(str).charAt(0).toUpperCase() + String(str).slice(1);
+}
+
+function splitAdresse(adresse) {
+  if (!adresse) return ["", ""];
+
+  const parts = String(adresse).split(" ");
+  const cpIndex = parts.findIndex(p => /^\d{5}$/.test(p));
+
+  if (cpIndex === -1) {
+    return [adresse, ""];
+  }
+
+  const ligne1 = parts.slice(0, cpIndex).join(" ");
+  const ligne2 = parts.slice(cpIndex).join(" ");
+
+  return [ligne1, ligne2];
 }
 
   const heureTxt = d.toLocaleTimeString("fr-FR", {

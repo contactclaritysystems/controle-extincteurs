@@ -451,8 +451,8 @@ function render() {
       c.innerHTML += `<div class="card ok" style="animation-delay:${i*.04}s">
         <div class="icon">✅</div>
         <div class="info">
-          <div class="cname">${item.name}</div>
-          <div class="cdate">${fmt(item.date)}${u}</div>
+          <div class="cname">${displayName(item)}</div>
+          <div class="cdate">${fmtFull(item)}${u}</div>
         </div>
       </div>`;
     });

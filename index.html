@@ -465,12 +465,27 @@ function displayName(item) {
 }
 
 function fmtFull(item) {
-  const d = new Date(item.date);
+  if (!item.date) return "";
+
+  const cleanDate = String(item.date).replace(" ", "T");
+  const d = new Date(cleanDate);
+
+  if (isNaN(d.getTime())) return "";
+
   const dateTxt = d.toLocaleDateString("fr-FR", {
     weekday: "long",
     day: "numeric",
     month: "long"
   });
+
+  const heureTxt = d.toLocaleTimeString("fr-FR", {
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+
+  const finalDate = dateTxt.charAt(0).toUpperCase() + dateTxt.slice(1);
+  return `${finalDate} · ${heureTxt}`;
+}
 
   const heureTxt = d.toLocaleTimeString("fr-FR", {
     hour: "2-digit",

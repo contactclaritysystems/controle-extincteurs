@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -10,325 +9,321 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-–accent:       #0A84FF;
-–danger:       #FF3B30;
-–danger-soft:  rgba(255,59,48,0.10);
-–warning:      #FF9500;
-–warning-soft: rgba(255,149,0,0.10);
-–success:      #30D158;
-–success-soft: rgba(48,209,88,0.10);
-–bg:           #F2F2F7;
-–surface:      #FFFFFF;
-–label:        #000000;
-–label3:       rgba(60,60,67,0.55);
-–sep:          rgba(60,60,67,0.12);
+  --accent:       #0A84FF;
+  --danger:       #FF3B30;
+  --danger-soft:  rgba(255,59,48,0.10);
+  --warning:      #FF9500;
+  --warning-soft: rgba(255,149,0,0.10);
+  --success:      #30D158;
+  --success-soft: rgba(48,209,88,0.10);
+  --bg:           #E8EDF5;
+  --surface:      #FFFFFF;
+  --label:        #0A0F1E;
+  --label3:       rgba(60,60,67,0.55);
+  --sep:          rgba(60,60,67,0.12);
 }
 
 html, body {
-height: 100%;
-background: var(–bg);
-font-family: ‘DM Sans’, -apple-system, BlinkMacSystemFont, sans-serif;
+  height: 100%;
+  background: var(--bg);
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 #wrap {
-display: flex;
-justify-content: center;
-min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 #app {
-width: 100%;
-max-width: 430px;
-background: var(–surface);
-display: flex;
-flex-direction: column;
-min-height: 100vh;
+  width: 100%;
+  max-width: 430px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* HEADER */
 .hdr {
-background: var(–surface);
-padding: 16px 18px 10px;
-border-bottom: 1px solid var(–sep);
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 10px;
+  background: var(--surface);
+  padding: 14px 18px 10px;
+  border-bottom: 1px solid var(--sep);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
-.logo { height: 80px; width: auto; max-width: 180px; object-fit: contain; }
+.logo { height: 64px; width: auto; max-width: 160px; object-fit: contain; }
 
 .badge {
-background: rgba(255,59,48,0.12);
-color: var(–danger);
-font-size: 12px;
-font-weight: 700;
-padding: 4px 10px;
-border-radius: 20px;
-display: none;
-white-space: nowrap;
+  background: rgba(255,59,48,0.12);
+  color: var(--danger);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  display: none;
+  white-space: nowrap;
 }
 .badge.on { display: block; }
 
 /* TABS */
 .tabs {
-display: flex;
-background: var(–surface);
-border-bottom: 1px solid var(–sep);
+  display: flex;
+  background: var(--surface);
+  border-bottom: 1px solid var(--sep);
 }
 
 .tab {
-flex: 1;
-padding: 13px 4px;
-text-align: center;
-font-size: 13px;
-font-weight: 600;
-color: var(–label3);
-cursor: pointer;
-position: relative;
-user-select: none;
--webkit-tap-highlight-color: transparent;
-transition: color .18s;
+  flex: 1;
+  padding: 11px 4px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--label3);
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color .18s;
 }
 
-.tab.active { color: var(–accent); }
+.tab.active { color: var(--accent); }
 
 .tab.active::after {
-content: ‘’;
-position: absolute;
-bottom: -1px; left: 16px; right: 16px;
-height: 2.5px;
-background: var(–accent);
-border-radius: 2px 2px 0 0;
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 16px; right: 16px;
+  height: 2.5px;
+  background: var(--accent);
+  border-radius: 2px 2px 0 0;
 }
 
 /* CONTENT */
 #content {
-flex: 1;
-overflow-y: auto;
--webkit-overflow-scrolling: touch;
-padding: 12px;
-background: var(–bg);
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 10px;
+  background: var(--bg);
 }
 
 /* SECTION LABEL */
 .slabel {
-font-size: 11px;
-font-weight: 700;
-letter-spacing: .07em;
-text-transform: uppercase;
-color: var(–label3);
-padding: 4px 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--label3);
+  padding: 4px 2px 6px;
 }
 
 /* CARD */
 .card {
-background: var(–surface);
-border-radius: 16px;
-padding: 10px 14px 10px 16px;
-margin-bottom: 8px;
-display: flex;
-align-items: flex-start;
-gap: 10px;
-box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-position: relative;
-overflow: hidden;
-transition: opacity .25s, transform .2s;
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 10px 12px 10px 14px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  position: relative;
+  overflow: hidden;
+  transition: opacity .25s, transform .2s;
 }
 
 .card::before {
-content: ‘’;
-position: absolute;
-left: 0; top: 0; bottom: 0;
-width: 4px;
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
 }
 
-.card.red::before    { background: var(–danger); }
-.card.orange::before { background: var(–warning); }
-.card.ok::before     { background: var(–success); }
+.card.red::before    { background: var(--danger); }
+.card.orange::before { background: var(--warning); }
+.card.ok::before     { background: var(--success); }
 
 .icon {
-width: 34px; height: 34px;
-border-radius: 10px;
-display: flex; align-items: center; justify-content: center;
-font-size: 16px;
-flex-shrink: 0;
-margin-top: 1px;
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 1px;
 }
 
-.card.red    .icon { background: var(–danger-soft); }
-.card.orange .icon { background: var(–warning-soft); }
-.card.ok     .icon { background: var(–success-soft); }
+.card.red    .icon { background: var(--danger-soft); }
+.card.orange .icon { background: var(--warning-soft); }
+.card.ok     .icon { background: var(--success-soft); }
 
-/* INFO : prend toute la largeur, bouton en dessous */
 .card-body {
-flex: 1;
-min-width: 0;
-display: flex;
-flex-direction: column;
-gap: 0;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .info { width: 100%; }
 
 .cname {
-font-size: 15px;
-font-weight: 700;
-color: var(–label);
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-line-height: 1.2;
-margin-bottom: 3px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--label);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+  margin-bottom: 2px;
 }
 
 .cdate {
-font-size: 12px;
-line-height: 1.4;
-font-weight: 500;
-color: var(–label3);
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
+  font-size: 11.5px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--label3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.card.red    .cdate { color: var(–danger); }
-.card.orange .cdate { color: var(–warning); }
+.card.red    .cdate { color: var(--danger); }
+.card.orange .cdate { color: var(--warning); }
 
-/* BUTTON : en bas à droite, sous le texte */
 .vbtn-wrap {
-display: flex;
-justify-content: flex-end;
-margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
 }
 
 .vbtn {
-flex-shrink: 0;
-border: none;
-cursor: pointer;
-font-family: inherit;
-font-size: 13px;
-font-weight: 700;
-color: #fff;
-padding: 0 18px;
-height: 34px;
-border-radius: 10px;
-transition: opacity .15s, transform .15s;
--webkit-tap-highlight-color: transparent;
-background: var(–accent);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  padding: 0 14px;
+  height: 30px;
+  border-radius: 8px;
+  transition: opacity .15s, transform .15s;
+  -webkit-tap-highlight-color: transparent;
+  background: var(--accent);
 }
 
-.card.red    .vbtn { background: var(–danger); }
-.card.orange .vbtn { background: var(–warning); }
+.card.red    .vbtn { background: var(--danger); }
+.card.orange .vbtn { background: var(--warning); }
 .vbtn:active { opacity: .8; transform: scale(.96); }
 
 /* EMPTY */
 .empty {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 10px;
-padding: 72px 32px;
-animation: fadeUp .3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 72px 32px;
+  animation: fadeUp .3s ease;
 }
 
-.empty-ico   { font-size: 46px; }
-.empty-title { font-size: 17px; font-weight: 700; color: var(–label); }
-.empty-sub   { font-size: 13px; color: var(–label3); text-align: center; }
+.empty-ico   { font-size: 40px; }
+.empty-title { font-size: 16px; font-weight: 700; color: var(--label); }
+.empty-sub   { font-size: 13px; color: var(--label3); text-align: center; }
 
 /* LOADER */
 .loader { display: flex; justify-content: center; padding: 70px; }
 
 .spinner {
-width: 28px; height: 28px;
-border: 3px solid var(–sep);
-border-top-color: var(–accent);
-border-radius: 50%;
-animation: spin .7s linear infinite;
+  width: 26px; height: 26px;
+  border: 3px solid var(--sep);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
 }
 
 /* ACTION SHEET */
 .backdrop {
-position: fixed;
-inset: 0;
-background: rgba(0,0,0,0.35);
-display: flex;
-align-items: flex-end;
-justify-content: center;
-z-index: 100;
-opacity: 0;
-pointer-events: none;
-transition: opacity .22s ease;
-backdrop-filter: blur(4px);
--webkit-backdrop-filter: blur(4px);
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .backdrop.open { opacity: 1; pointer-events: all; }
 
 .sheet {
-width: 100%;
-max-width: 430px;
-padding: 0 10px 28px;
-transform: translateY(100%);
-transition: transform .3s cubic-bezier(.32,.72,0,1);
+  width: 100%;
+  max-width: 430px;
+  padding: 0 10px 28px;
+  transform: translateY(100%);
+  transition: transform .3s cubic-bezier(.32,.72,0,1);
 }
 
 .backdrop.open .sheet { transform: translateY(0); }
 
 .sheet-card {
-background: rgba(250,250,250,0.97);
-border-radius: 16px;
-overflow: hidden;
-margin-bottom: 8px;
+  background: rgba(250,250,250,0.97);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 8px;
 }
 
 .sheet-info {
-padding: 14px 16px;
-text-align: center;
-border-bottom: 1px solid var(–sep);
+  padding: 14px 16px;
+  text-align: center;
+  border-bottom: 1px solid var(--sep);
 }
 
-.sheet-name { font-size: 15px; font-weight: 700; color: var(–label); }
-.sheet-sub  { font-size: 12px; color: var(–label3); margin-top: 2px; }
+.sheet-name { font-size: 15px; font-weight: 700; color: var(--label); }
+.sheet-sub  { font-size: 12px; color: var(--label3); margin-top: 2px; }
 
 .sbtn {
-width: 100%;
-padding: 16px;
-background: transparent;
-border: none;
-font-family: inherit;
-font-size: 17px;
-font-weight: 600;
-cursor: pointer;
--webkit-tap-highlight-color: transparent;
-transition: background .12s;
+  width: 100%;
+  padding: 16px;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .12s;
 }
 
 .sbtn:active { background: rgba(0,0,0,0.05); }
-.sbtn + .sbtn { border-top: 1px solid var(–sep); }
-.sbtn.confirm { color: var(–accent); }
+.sbtn + .sbtn { border-top: 1px solid var(--sep); }
+.sbtn.confirm { color: var(--accent); }
 
 .sheet-cancel { background: rgba(250,250,250,0.97); border-radius: 16px; overflow: hidden; }
-.sbtn.cancel  { color: var(–label); }
+.sbtn.cancel  { color: var(--label); }
 
 /* TOAST */
 .toast {
-position: fixed;
-left: 50%;
-bottom: 30px;
-transform: translateX(-50%) translateY(10px);
-background: rgba(28,28,28,0.88);
-color: #fff;
-padding: 11px 18px;
-border-radius: 14px;
-font-size: 14px;
-font-weight: 600;
-white-space: nowrap;
-z-index: 999;
-opacity: 0;
-pointer-events: none;
-transition: opacity .2s, transform .2s;
-backdrop-filter: blur(12px);
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(28,28,28,0.88);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s, transform .2s;
+  backdrop-filter: blur(12px);
 }
 
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -336,34 +331,31 @@ backdrop-filter: blur(12px);
 .card.removing { opacity: 0; transform: translateX(12px) scale(.97); }
 
 @keyframes fadeUp {
-from { opacity: 0; transform: translateY(8px); }
-to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .card { animation: fadeUp .2s ease both; }
 </style>
-
 </head>
 <body>
 
 <div id="wrap">
   <div id="app">
 
-```
-<div class="hdr">
-  <img src="https://i.imgur.com/1ZFTLIo.png" class="logo" alt="Clarity Systems">
-  <span class="badge" id="badge"></span>
-</div>
+    <div class="hdr">
+      <img src="https://i.imgur.com/1ZFTLIo.png" class="logo" alt="Clarity Systems">
+      <span class="badge" id="badge"></span>
+    </div>
 
-<div class="tabs">
-  <div class="tab active" data-tab="today">Aujourd'hui</div>
-  <div class="tab" data-tab="planning">Planning</div>
-  <div class="tab" data-tab="history">Historique</div>
-</div>
+    <div class="tabs">
+      <div class="tab active" data-tab="today">Aujourd'hui</div>
+      <div class="tab" data-tab="planning">Planning</div>
+      <div class="tab" data-tab="history">Historique</div>
+    </div>
 
-<div id="content"></div>
-```
+    <div id="content"></div>
 
   </div>
 </div>
@@ -392,7 +384,6 @@ const HIST_URL = "https://hook.eu1.make.com/6etkl3pphxxwmly0jha93m246am0d2n8";
 
 let items = [], hist = [], currentTab = "today", pendingId = null;
 
-/* TABS */
 document.querySelectorAll(".tab").forEach(t =>
   t.addEventListener("click", () => {
     document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
@@ -402,14 +393,12 @@ document.querySelectorAll(".tab").forEach(t =>
   })
 );
 
-/* SHEET */
 document.getElementById("sbtn-confirm").addEventListener("click", confirmVal);
 document.getElementById("sbtn-cancel").addEventListener("click", closeSheet);
 document.getElementById("backdrop").addEventListener("click", e => {
   if (e.target === document.getElementById("backdrop")) closeSheet();
 });
 
-/* DATA */
 async function loadData() {
   showLoader();
   try { items = await (await fetch(GET_URL)).json();  } catch { items = []; }
@@ -428,7 +417,6 @@ function updateBadge() {
   b.classList.toggle("on", n > 0);
 }
 
-/* RENDER */
 function showLoader() {
   document.getElementById("content").innerHTML =
     '<div class="loader"><div class="spinner"></div></div>';
@@ -441,13 +429,9 @@ function render() {
 
   if (currentTab === "today") {
     const all = items.filter(i => midnight(i.date) <= today);
-    if (!all.length) {
-      c.innerHTML = empty("✅", "Aucun RDV pour aujourd'hui");
-      return;
-    }
+    if (!all.length) { c.innerHTML = empty("✅", "Aucun RDV pour aujourd'hui"); return; }
     const late   = all.filter(i => midnight(i.date) < today);
     const todayL = all.filter(i => midnight(i.date).getTime() === today.getTime());
-
     if (late.length) {
       c.innerHTML += '<div class="slabel">En retard</div>';
       late.forEach((item, i) => c.innerHTML += card(item, i, "red", true));
@@ -479,8 +463,8 @@ function render() {
           <div class="info">
             <div class="cname">${capitalize(item.societe)} · ${capitalize(item.contact)}</div>
             <div class="cdate">${fmtFull(item)}</div>
-            ${adr1 ? `<div class="cdate" style="font-size:11px;opacity:.7">${capitalize(adr1)}</div>` : ""}
-            ${adr2 ? `<div class="cdate" style="font-size:11px;opacity:.7">${capitalize(adr2)}</div>` : ""}
+            ${adr1 ? `<div class="cdate" style="font-size:10.5px;opacity:.7">${capitalize(adr1)}</div>` : ""}
+            ${adr2 ? `<div class="cdate" style="font-size:10.5px;opacity:.7">${capitalize(adr2)}</div>` : ""}
           </div>
         </div>
       </div>`;
@@ -499,8 +483,7 @@ function fmtFull(item) {
   if (isNaN(d.getTime())) return "";
   const dateTxt = d.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
   const heureTxt = d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
-  const finalDate = dateTxt.charAt(0).toUpperCase() + dateTxt.slice(1);
-  return `${finalDate} · ${heureTxt}`;
+  return dateTxt.charAt(0).toUpperCase() + dateTxt.slice(1) + " · " + heureTxt;
 }
 
 function capitalize(str) {
@@ -527,8 +510,8 @@ function card(item, idx, cls, btn = true) {
       <div class="info">
         <div class="cname">${name}</div>
         <div class="cdate">${fmtFull(item)}</div>
-        ${adr1 ? `<div class="cdate" style="font-size:11px;opacity:.7">${capitalize(adr1)}</div>` : ""}
-        ${adr2 ? `<div class="cdate" style="font-size:11px;opacity:.7">${capitalize(adr2)}</div>` : ""}
+        ${adr1 ? `<div class="cdate" style="font-size:10.5px;opacity:.7">${capitalize(adr1)}</div>` : ""}
+        ${adr2 ? `<div class="cdate" style="font-size:10.5px;opacity:.7">${capitalize(adr2)}</div>` : ""}
       </div>
       ${btn ? `<div class="vbtn-wrap">
         <button class="vbtn" onclick="openSheet('${item.id}','${name.replace(/'/g,"\\'")}')">Valider</button>
@@ -545,7 +528,6 @@ function empty(ico, title, sub = "") {
   </div>`;
 }
 
-/* SHEET */
 function openSheet(id, name) {
   pendingId = id;
   document.getElementById("sname").textContent = name;
@@ -571,7 +553,6 @@ async function confirmVal() {
   setTimeout(loadData, 420);
 }
 
-/* TOAST */
 let tt;
 function toast(msg) {
   const el = document.getElementById("toast");
@@ -583,6 +564,5 @@ function toast(msg) {
 
 loadData();
 </script>
-
 </body>
 </html>

@@ -462,20 +462,26 @@ function render() {
 
 function card(item, idx, cls, btn = true) {
   const ico = cls === "red" ? "⚠️" : cls === "orange" ? "🔔" : "📋";
+  const safeName = String(item.name || "").replace(/'/g, "\\'");
+  const safeAdresse = String(item.adresse || "").replace(/'/g, "\\'");
+
   return `<div class="card ${cls}" id="card-${item.id}" style="animation-delay:${idx*.04}s">
     <div class="icon">${ico}</div>
+
     <div class="info">
-  <div class="cname">${item.entreprise || ""} · ${item.name || ""}</div>
-  <div class="cdate">${fmtDate(item.date)} · ${fmtHeure(item.date)}</div>
-  <div class="cdate">${getAdresseSansCP(item.adresse)}</div>
-  <div class="cdate">${getCodePostalVille(item.adresse)}</div>
-</div>
-  ${btn ? `
-  <div style="display:flex; flex-direction:column; gap:8px;">
-    <button class="vbtn" onclick="openSheet('${item.id}','${item.name.replace(/'/g,"\\'")}')">Valider</button>
-    <button class="vbtn" style="background:#34C759;" onclick="openMaps('${item.adresse || ""}')">Maps</button>
-  </div>
-` : ""}
+      <div class="cname">${item.entreprise || ""} · ${item.name || ""}</div>
+      <div class="cdate">${fmtDate(item.date)} · ${fmtHeure(item.date)}</div>
+      <div class="cdate">${getAdresseSansCP(item.adresse)}</div>
+      <div class="cdate">${getCodePostalVille(item.adresse)}</div>
+    </div>
+
+    ${btn ? `
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button class="vbtn" onclick="openSheet('${item.id}','${safeName}')">Valider</button>
+        <button class="vbtn" style="background:#34C759;" onclick="openMaps('${safeAdresse}')">Maps</button>
+      </div>
+    ` : ""}
+  </div>`;
 }
 
 function empty(ico, title, sub) {

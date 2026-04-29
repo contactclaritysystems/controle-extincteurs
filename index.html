@@ -927,9 +927,11 @@ function openSheet(name, sub, buttonsHtml) {
 }
 
 function closeSheet() {
-  document.getElementById("backdrop").classList.remove("open");
+  const backdrop = document.getElementById("backdrop");
+  backdrop.classList.remove("open");
   document.getElementById("sheetButtons").innerHTML = "";
-  pendingId = null;
+  document.getElementById("sname").textContent = "";
+  document.getElementById("ssub").textContent = "";
 }
 
 function showMainBars() {

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Clarity Systems</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -65,6 +65,7 @@ html, body {
   display:none;
   white-space:nowrap;
 }
+
 .badge.on { display:block; }
 
 /* TABS */
@@ -193,21 +194,21 @@ html, body {
 }
 
 /* DETAIL PAGE */
-.detail-head {
-  background:#9B0D16;
-  color:white;
+.detail-top {
+  background:#fff;
   margin:-14px -14px 18px;
-  padding:18px 18px 22px;
+  padding:16px 18px 18px;
+  border-bottom:1px solid var(--sep);
 }
 
 .back {
   display:inline-flex;
   align-items:center;
   gap:6px;
-  color:white;
-  font-size:14px;
-  font-weight:700;
-  margin-bottom:18px;
+  color:var(--accent);
+  font-size:15px;
+  font-weight:800;
+  margin-bottom:14px;
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
 }
@@ -215,21 +216,27 @@ html, body {
 .detail-brand {
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:14px;
 }
 
 .detail-logo {
-  width:52px;
-  height:52px;
-  border-radius:14px;
-  object-fit:cover;
-  background:white;
+  width:58px;
+  height:58px;
+  object-fit:contain;
 }
 
 .detail-title {
-  font-size:22px;
+  font-size:26px;
   font-weight:800;
-  letter-spacing:.02em;
+  color:var(--label);
+  letter-spacing:-.02em;
+}
+
+.detail-sub {
+  font-size:13px;
+  color:var(--label3);
+  font-weight:700;
+  margin-top:2px;
 }
 
 .next-label {
@@ -252,7 +259,7 @@ html, body {
 }
 
 .main-intervention .icon {
-  background:rgba(155,13,22,0.10);
+  background:rgba(10,132,255,0.10);
 }
 
 .main-title {
@@ -269,16 +276,19 @@ html, body {
 }
 
 .main-date {
-  color:#9B0D16;
-  font-weight:700;
+  color:var(--warning);
+  font-weight:800;
   margin-top:8px;
 }
+
+.main-date.late { color:var(--danger); }
+.main-date.future { color:var(--success); }
 
 .action-grid {
   display:grid;
   grid-template-columns:repeat(3, 1fr);
   gap:10px;
-  margin-bottom:18px;
+  margin-bottom:16px;
 }
 
 .action {
@@ -307,7 +317,7 @@ html, body {
 
 .action span {
   font-size:13px;
-  font-weight:700;
+  font-weight:800;
   color:var(--label);
 }
 
@@ -316,21 +326,49 @@ html, body {
   cursor:not-allowed;
 }
 
-.close-btn {
+.bottom-actions {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding-bottom:18px;
+}
+
+.primary-btn,
+.secondary-btn,
+.danger-btn {
   width:100%;
   border:none;
   border-radius:16px;
-  background:#9B0D16;
-  color:white;
   font-family:inherit;
   font-size:16px;
   font-weight:800;
   padding:16px;
-  margin-bottom:14px;
   cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
 }
 
-.close-btn:active { transform:scale(.98); }
+.primary-btn {
+  background:var(--accent);
+  color:white;
+}
+
+.secondary-btn {
+  background:white;
+  color:var(--accent);
+  border:1px solid rgba(10,132,255,0.18);
+}
+
+.danger-btn {
+  background:white;
+  color:var(--danger);
+  border:1px solid rgba(255,59,48,0.18);
+}
+
+.primary-btn:active,
+.secondary-btn:active,
+.danger-btn:active {
+  transform:scale(.98);
+}
 
 /* EMPTY */
 .empty {
@@ -394,13 +432,13 @@ html, body {
 }
 
 .sheet-info {
-  padding:14px 16px;
+  padding:16px;
   text-align:center;
   border-bottom:1px solid var(--sep);
 }
 
-.sheet-name { font-size:15px; font-weight:700; color:var(--label); }
-.sheet-sub { font-size:12px; color:var(--label3); margin-top:2px; }
+.sheet-name { font-size:16px; font-weight:800; color:var(--label); }
+.sheet-sub { font-size:13px; color:var(--label3); margin-top:3px; }
 
 .sbtn {
   width:100%;
@@ -409,12 +447,14 @@ html, body {
   border:none;
   font-family:inherit;
   font-size:17px;
-  font-weight:600;
+  font-weight:700;
   cursor:pointer;
 }
 
 .sbtn + .sbtn { border-top:1px solid var(--sep); }
 .sbtn.confirm { color:var(--accent); }
+.sbtn.warn { color:var(--warning); }
+.sbtn.danger { color:var(--danger); }
 
 .sheet-cancel {
   background:rgba(250,250,250,0.97);
@@ -447,11 +487,6 @@ html, body {
 .toast.show {
   opacity:1;
   transform:translateX(-50%) translateY(0);
-}
-
-.removing {
-  opacity:0;
-  transform:translateX(12px) scale(.97);
 }
 
 @keyframes fadeUp {
@@ -490,12 +525,12 @@ html, body {
     <div class="sheet-card">
       <div class="sheet-info">
         <div class="sheet-name" id="sname"></div>
-        <div class="sheet-sub">Clôturer cette intervention ?</div>
+        <div class="sheet-sub" id="ssub"></div>
       </div>
-      <button class="sbtn confirm" id="sbtn-confirm">✓ Clôturer l’intervention</button>
+      <div id="sheetButtons"></div>
     </div>
     <div class="sheet-cancel">
-      <button class="sbtn cancel" id="sbtn-cancel">Annuler</button>
+      <button class="sbtn cancel" onclick="closeSheet()">Retour</button>
     </div>
   </div>
 </div>
@@ -507,7 +542,7 @@ const GET_URL  = "https://hook.eu1.make.com/wfp9dc520ic15yvl7u4lx6v1oyuhlckn";
 const POST_URL = "https://hook.eu1.make.com/v2at1keat2dqxxf2jza4tnxp3m3a2g35";
 const HIST_URL = "https://hook.eu1.make.com/6etkl3pphxxwmly0jha93m246am0d2n8";
 
-let items = [], hist = [], currentTab = "today", pendingId = null, selectedItem = null;
+let items = [], hist = [], currentTab = "today", selectedItem = null, pendingId = null;
 
 /* TABS */
 document.querySelectorAll(".tab").forEach(t =>
@@ -522,13 +557,6 @@ document.querySelectorAll(".tab").forEach(t =>
     render();
   })
 );
-
-/* SHEET */
-document.getElementById("sbtn-confirm").addEventListener("click", confirmVal);
-document.getElementById("sbtn-cancel").addEventListener("click", closeSheet);
-document.getElementById("backdrop").addEventListener("click", e => {
-  if (e.target === document.getElementById("backdrop")) closeSheet();
-});
 
 /* DATA */
 async function loadData() {
@@ -568,6 +596,9 @@ function render() {
     return;
   }
 
+  document.getElementById("tabs").style.display = "flex";
+  document.getElementById("mainHeader").style.display = "flex";
+
   const today = midnight(new Date());
 
   if (currentTab === "today") {
@@ -583,12 +614,12 @@ function render() {
 
     if (late.length) {
       c.innerHTML += '<div class="slabel">En retard</div>';
-      late.forEach((item, i) => c.innerHTML += listCard(item, i, "red", true));
+      late.forEach((item, i) => c.innerHTML += listCard(item, i, "red"));
     }
 
     if (todayL.length) {
       c.innerHTML += '<div class="slabel">Aujourd’hui</div>';
-      todayL.forEach((item, i) => c.innerHTML += listCard(item, i, "orange", true));
+      todayL.forEach((item, i) => c.innerHTML += listCard(item, i, "orange"));
     }
 
   } else if (currentTab === "planning") {
@@ -599,12 +630,12 @@ function render() {
       return;
     }
 
-    c.innerHTML += '<div class="slabel">À venir</div>';
+    c.innerHTML += '<div class="slabel">Planning complet</div>';
 
     sorted.forEach((item, i) => {
       const d = midnight(item.date);
       const cls = d < today ? "red" : d.getTime() === today.getTime() ? "orange" : "ok";
-      c.innerHTML += listCard(item, i, cls, true);
+      c.innerHTML += listCard(item, i, cls);
     });
 
   } else {
@@ -631,11 +662,10 @@ function render() {
   }
 }
 
-function listCard(item, idx, cls, clickable = true) {
+function listCard(item, idx, cls) {
   const ico = cls === "red" ? "⚠️" : cls === "orange" ? "📅" : "📋";
-  const click = clickable ? `onclick="openDetail('${item.id}')"` : "";
 
-  return `<div class="card ${cls}" id="card-${item.id}" style="animation-delay:${idx*.04}s" ${click}>
+  return `<div class="card ${cls}" id="card-${item.id}" style="animation-delay:${idx*.04}s" onclick="openDetail('${item.id}')">
     <div class="icon">${ico}</div>
     <div class="info">
       <div class="cname">${item.entreprise || ""} · ${item.name || ""}</div>
@@ -653,19 +683,37 @@ function renderDetail(item) {
   document.getElementById("tabs").style.display = "none";
   document.getElementById("mainHeader").style.display = "none";
 
+  const today = midnight(new Date());
+  const d = midnight(item.date);
+  const isLate = d < today;
+  const isToday = d.getTime() === today.getTime();
+  const isFuture = d > today;
+
   const phone = item.telephone || item.tel || item.phone || "";
   const hasPhone = String(phone).trim().length > 0;
 
+  const dateClass = isLate ? "late" : isFuture ? "future" : "";
+  const statusText = isLate ? "Intervention en retard" : isFuture ? "Intervention planifiée" : "Intervention du jour";
+
+  const closeButton = !isFuture ? `
+    <button class="primary-btn" onclick="openCloseSheet('${item.id}', '${escapeJs(item.name || item.entreprise || "Client")}')">
+      Clôturer l’intervention
+    </button>
+  ` : "";
+
   c.innerHTML = `
-    <div class="detail-head">
+    <div class="detail-top">
       <div class="back" onclick="backToList()">‹ Retour</div>
       <div class="detail-brand">
         <img src="https://i.imgur.com/1ZFTLIo.png" class="detail-logo" alt="Logo">
-        <div class="detail-title">Intervention</div>
+        <div>
+          <div class="detail-title">Intervention</div>
+          <div class="detail-sub">${statusText}</div>
+        </div>
       </div>
     </div>
 
-    <div class="next-label">Intervention sélectionnée</div>
+    <div class="next-label">Fiche intervention</div>
 
     <div class="main-intervention">
       <div class="icon">📅</div>
@@ -674,7 +722,7 @@ function renderDetail(item) {
         <div class="main-line">${item.name || ""}</div>
         <div class="main-line">${getAdresseSansCP(item.adresse)}</div>
         <div class="main-line">${getCodePostalVille(item.adresse)}</div>
-        <div class="main-line main-date">${fmtDate(item.date)} · ${fmtHeure(item.date)}</div>
+        <div class="main-line main-date ${dateClass}">${fmtDate(item.date)} · ${fmtHeure(item.date)}</div>
       </div>
     </div>
 
@@ -710,9 +758,17 @@ function renderDetail(item) {
       </button>
     </div>
 
-    <button class="close-btn" onclick="openSheet('${item.id}', '${escapeJs(item.name || item.entreprise || "Client")}')">
-      Clôturer l’intervention
-    </button>
+    <div class="bottom-actions">
+      ${closeButton}
+
+      <button class="secondary-btn" onclick="openReportSheet('${item.id}', '${escapeJs(item.name || item.entreprise || "Client")}')">
+        Reporter
+      </button>
+
+      <button class="danger-btn" onclick="openCancelSheet('${item.id}', '${escapeJs(item.name || item.entreprise || "Client")}')">
+        Annuler
+      </button>
+    </div>
   `;
 }
 
@@ -736,10 +792,11 @@ function empty(ico, title, sub = "") {
   </div>`;
 }
 
-/* SHEET */
-function openSheet(id, name) {
-  pendingId = id;
+/* SHEETS */
+function openSheet(name, sub, buttonsHtml) {
   document.getElementById("sname").textContent = name;
+  document.getElementById("ssub").textContent = sub;
+  document.getElementById("sheetButtons").innerHTML = buttonsHtml;
   document.getElementById("backdrop").classList.add("open");
 }
 
@@ -747,7 +804,35 @@ function closeSheet() {
   document.getElementById("backdrop").classList.remove("open");
 }
 
-async function confirmVal() {
+function openCloseSheet(id, name) {
+  pendingId = id;
+  openSheet(
+    name,
+    "Clôturer cette intervention ?",
+    `<button class="sbtn confirm" onclick="confirmClose()">✓ Clôturer l’intervention</button>`
+  );
+}
+
+function openReportSheet(id, name) {
+  pendingId = id;
+  openSheet(
+    name,
+    "Envoyer un lien de reprogrammation au client ?",
+    `<button class="sbtn confirm" onclick="fakeAction('reporter')">Envoyer le lien de RDV</button>`
+  );
+}
+
+function openCancelSheet(id, name) {
+  pendingId = id;
+  openSheet(
+    name,
+    "Que voulez-vous faire ?",
+    `<button class="sbtn warn" onclick="fakeAction('annuler_reprogrammer')">Annuler et reprogrammer</button>
+     <button class="sbtn danger" onclick="fakeAction('annuler_definitif')">Annuler définitivement</button>`
+  );
+}
+
+async function confirmClose() {
   try {
     await fetch(POST_URL, {
       method:"POST",
@@ -765,6 +850,18 @@ async function confirmVal() {
     document.getElementById("mainHeader").style.display = "flex";
     loadData();
   }, 420);
+}
+
+function fakeAction(action) {
+  closeSheet();
+
+  if (action === "reporter") {
+    toast("Lien de RDV bientôt connecté à Make");
+  } else if (action === "annuler_reprogrammer") {
+    toast("Annulation + reprogrammation bientôt connectées");
+  } else {
+    toast("Annulation définitive bientôt connectée");
+  }
 }
 
 /* ACTIONS */

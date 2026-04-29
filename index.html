@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -649,29 +650,33 @@ textarea:focus { border-color: var(--accent); }
 .action:nth-child(5) { animation-delay: .21s; }
 .action:nth-child(6) { animation-delay: .25s; }
 </style>
+
 </head>
 
 <body>
 <div id="wrap">
   <div id="app">
 
-    <div class="hdr" id="mainHeader">
-      <img src="https://i.imgur.com/1ZFTLIo.png" class="logo" alt="Clarity Systems">
-      <span class="badge" id="badge"></span>
-    </div>
+```
+<div class="hdr" id="mainHeader">
+  <img src="https://i.imgur.com/1ZFTLIo.png" class="logo" alt="Clarity Systems">
+  <span class="badge" id="badge"></span>
+</div>
 
-    <div class="tabs" id="tabs">
-      <div class="tab active" data-tab="today">Aujourd'hui</div>
-      <div class="tab" data-tab="planning">Planning</div>
-      <div class="tab" data-tab="history">Historique</div>
-    </div>
+<div class="tabs" id="tabs">
+  <div class="tab active" data-tab="today">Aujourd'hui</div>
+  <div class="tab" data-tab="planning">Planning</div>
+  <div class="tab" data-tab="history">Historique</div>
+</div>
 
-    <div id="content"></div>
+<div id="content"></div>
+```
 
   </div>
 </div>
 
 <!-- SHEET -->
+
 <div class="backdrop" id="backdrop" onclick="closeSheet()">
   <div class="sheet" onclick="event.stopPropagation()">
     <div class="sheet-card">
@@ -966,180 +971,177 @@ function renderReportStep() {
         <div class="detail-sub">Optionnel</div>
       </div>
       <textarea id="comment" placeholder="Exemple : RAS, accès impossible, remplacement conseillé…"></textarea>
-      <div class="bottom-actions">
-        <button class="primary-btn" onclick="saveReportLine()">Ajouter au rapport</button>
-      </div>`;
-  }
+
+```
+  <div class="bottom-actions">
+    <button class="primary-btn" onclick="saveReportLine()">Ajouter au rapport</button>
+  </div>`;
+```
+
+}
 }
 
 function renderChoiceStep(title, options, key) {
-  document.getElementById("content").innerHTML = `
-    <div class="detail-top">
-      <div class="back" onclick="backReportStep()">Retour</div>
-      <div class="detail-title">${title}</div>
-    </div>
-    <div class="action-grid">
-      ${options.map(o => `
-        <button class="action" onclick="selectReportValue('${key}','${escapeJs(o)}')">
-          <span style="font-size:13px;color:var(--label);font-weight:700">${safe(o)}</span>
-        </button>
-      `).join("")}
-    </div>`;
+document.getElementById(“content”).innerHTML = `<div class="detail-top"> <div class="back" onclick="backReportStep()">Retour</div> <div class="detail-title">${title}</div> </div> <div class="action-grid"> ${options.map(o =>`
+<button class="action" onclick="selectReportValue('${key}','${escapeJs(o)}')">
+<span style="font-size:13px;color:var(--label);font-weight:700">${safe(o)}</span>
+</button>
+`).join("")} </div>`;
 }
 
 function selectReportValue(key, value) { tempLine[key] = value; reportStep++; renderReportStep(); }
 
 function backReportStep() {
-  if (reportStep <= 1) { openReportPage(); return; }
-  reportStep--;
-  renderReportStep();
+if (reportStep <= 1) { openReportPage(); return; }
+reportStep–;
+renderReportStep();
 }
 
 function saveReportLine() {
-  const id = selectedItem.id;
-  if (!reportLinesById[id]) reportLinesById[id] = [];
-  tempLine.commentaire = document.getElementById("comment").value || "";
-  reportLinesById[id].push({...tempLine});
-  toast("✅ Tâche ajoutée");
-  openReportPage();
+const id = selectedItem.id;
+if (!reportLinesById[id]) reportLinesById[id] = [];
+tempLine.commentaire = document.getElementById(“comment”).value || “”;
+reportLinesById[id].push({…tempLine});
+toast(“✅ Tâche ajoutée”);
+openReportPage();
 }
 
 function removeReportLine(index) {
-  const id = selectedItem.id;
-  if (!reportLinesById[id]) return;
-  reportLinesById[id].splice(index, 1);
-  openReportPage();
+const id = selectedItem.id;
+if (!reportLinesById[id]) return;
+reportLinesById[id].splice(index, 1);
+openReportPage();
 }
 
 function closeReport() {
-  const id = selectedItem.id;
-  if (!(reportLinesById[id] || []).length) { toast("Ajoutez au moins une tâche"); return; }
-  reportClosedById[id] = true;
-  toast("✅ Rapport clôturé");
-  renderDetail(selectedItem);
+const id = selectedItem.id;
+if (!(reportLinesById[id] || []).length) { toast(“Ajoutez au moins une tâche”); return; }
+reportClosedById[id] = true;
+toast(“✅ Rapport clôturé”);
+renderDetail(selectedItem);
 }
 
 /* ── ACTIONS ── */
 function tryCloseIntervention(id) {
-  if (!reportClosedById[id]) { toast("Veuillez clôturer le rapport avant"); return; }
-  openCloseSheet(id, selectedItem.name || selectedItem.entreprise || "Client");
+if (!reportClosedById[id]) { toast(“Veuillez clôturer le rapport avant”); return; }
+openCloseSheet(id, selectedItem.name || selectedItem.entreprise || “Client”);
 }
 
 function openCloseSheet(id, name) {
-  pendingId = id;
-  openSheet(name, "Clôturer cette intervention ?",
-    `<button class="sbtn confirm" onclick="confirmClose()">✓ Clôturer l'intervention</button>`);
+pendingId = id;
+openSheet(name, “Clôturer cette intervention ?”,
+`<button class="sbtn confirm" onclick="confirmClose()">✓ Clôturer l'intervention</button>`);
 }
 
 async function confirmClose() {
-  try {
-    await fetch(POST_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: pendingId, rapport: reportLinesById[pendingId] || [] })
-    });
-  } catch {}
-  closeSheet();
-  toast("✅ Intervention clôturée");
-  selectedItem = null;
-  setTimeout(() => { showMainBars(); loadData(); }, 420);
+try {
+await fetch(POST_URL, {
+method: “POST”,
+headers: { “Content-Type”: “application/json” },
+body: JSON.stringify({ id: pendingId, rapport: reportLinesById[pendingId] || [] })
+});
+} catch {}
+closeSheet();
+toast(“✅ Intervention clôturée”);
+selectedItem = null;
+setTimeout(() => { showMainBars(); loadData(); }, 420);
 }
 
 function openRescheduleSheet(id, name) {
-  pendingId = id;
-  openSheet(name, "Envoyer un lien de reprogrammation au client ?",
-    `<button class="sbtn confirm" onclick="fakeAction('reporter')">Envoyer le lien de RDV</button>`);
+pendingId = id;
+openSheet(name, “Envoyer un lien de reprogrammation au client ?”,
+`<button class="sbtn confirm" onclick="fakeAction('reporter')">Envoyer le lien de RDV</button>`);
 }
 
 function openCancelSheet(id, name) {
-  pendingId = id;
-  openSheet(name, "Que voulez-vous faire ?",
-    `<button class="sbtn warn" onclick="fakeAction('annuler_reprogrammer')">Annuler et reprogrammer</button>
-     <button class="sbtn danger" onclick="fakeAction('annuler_definitif')">Annuler définitivement</button>`);
+pendingId = id;
+openSheet(name, “Que voulez-vous faire ?”,
+`<button class="sbtn warn" onclick="fakeAction('annuler_reprogrammer')">Annuler et reprogrammer</button> <button class="sbtn danger" onclick="fakeAction('annuler_definitif')">Annuler définitivement</button>`);
 }
 
 function fakeAction(action) {
-  closeSheet();
-  if (action === "reporter") toast("Lien de RDV bientôt connecté à Make");
-  if (action === "annuler_reprogrammer") toast("Annulation + reprogrammation bientôt connectées");
-  if (action === "annuler_definitif") toast("Annulation définitive bientôt connectée");
+closeSheet();
+if (action === “reporter”) toast(“Lien de RDV bientôt connecté à Make”);
+if (action === “annuler_reprogrammer”) toast(“Annulation + reprogrammation bientôt connectées”);
+if (action === “annuler_definitif”) toast(“Annulation définitive bientôt connectée”);
 }
 
 /* ── SHEET ── */
 function openSheet(name, sub, buttonsHtml) {
-  document.getElementById("sname").textContent = name;
-  document.getElementById("ssub").textContent = sub;
-  document.getElementById("sheetButtons").innerHTML = buttonsHtml;
-  document.getElementById("backdrop").classList.add("open");
+document.getElementById(“sname”).textContent = name;
+document.getElementById(“ssub”).textContent = sub;
+document.getElementById(“sheetButtons”).innerHTML = buttonsHtml;
+document.getElementById(“backdrop”).classList.add(“open”);
 }
 
 function closeSheet() {
-  document.getElementById("backdrop").classList.remove("open");
-  document.getElementById("sheetButtons").innerHTML = "";
+document.getElementById(“backdrop”).classList.remove(“open”);
+document.getElementById(“sheetButtons”).innerHTML = “”;
 }
 
 /* ── UI HELPERS ── */
 function showMainBars() {
-  document.getElementById("mainHeader").style.display = "flex";
-  document.getElementById("tabs").style.display = "flex";
+document.getElementById(“mainHeader”).style.display = “flex”;
+document.getElementById(“tabs”).style.display = “flex”;
 }
 function hideMainBars() {
-  document.getElementById("mainHeader").style.display = "none";
-  document.getElementById("tabs").style.display = "none";
+document.getElementById(“mainHeader”).style.display = “none”;
+document.getElementById(“tabs”).style.display = “none”;
 }
 function showLoader() {
-  document.getElementById("content").innerHTML = `<div class="loader"><div class="spinner"></div></div>`;
+document.getElementById(“content”).innerHTML = `<div class="loader"><div class="spinner"></div></div>`;
 }
-function empty(ico, title, sub = "") {
-  return `<div class="empty"><div class="empty-ico">${ico}</div><div class="empty-title">${title}</div><div class="empty-sub">${sub}</div></div>`;
+function empty(ico, title, sub = “”) {
+return `<div class="empty"><div class="empty-ico">${ico}</div><div class="empty-title">${title}</div><div class="empty-sub">${sub}</div></div>`;
 }
 
 let tt;
 function toast(msg) {
-  const el = document.getElementById("toast");
-  el.textContent = msg;
-  el.classList.add("show");
-  clearTimeout(tt);
-  tt = setTimeout(() => el.classList.remove("show"), 2300);
+const el = document.getElementById(“toast”);
+el.textContent = msg;
+el.classList.add(“show”);
+clearTimeout(tt);
+tt = setTimeout(() => el.classList.remove(“show”), 2300);
 }
 
-function callClient(phone) { window.location.href = "tel:" + phone; }
+function callClient(phone) { window.location.href = “tel:” + phone; }
 function openMaps(adresse) {
-  window.open("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(adresse), "_blank");
+window.open(“https://www.google.com/maps/search/?api=1&query=” + encodeURIComponent(adresse), “_blank”);
 }
 
 /* ── UTILS ── */
 function updateBadge() {
-  const today = midnight(new Date());
-  const n = items.filter(i => midnight(i.date) < today).length;
-  const b = document.getElementById("badge");
-  b.textContent = n + " en retard";
-  b.classList.toggle("on", n > 0);
+const today = midnight(new Date());
+const n = items.filter(i => midnight(i.date) < today).length;
+const b = document.getElementById(“badge”);
+b.textContent = n + “ en retard”;
+b.classList.toggle(“on”, n > 0);
 }
 function midnight(d) { const x = new Date(d); x.setHours(0,0,0,0); return x; }
 function fmtDate(str) {
-  const d = new Date(str);
-  const s = d.toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long" });
-  return s.charAt(0).toUpperCase() + s.slice(1);
+const d = new Date(str);
+const s = d.toLocaleDateString(“fr-FR”, { weekday:“long”, day:“numeric”, month:“long” });
+return s.charAt(0).toUpperCase() + s.slice(1);
 }
 function fmtHeure(str) {
-  return new Date(str).toLocaleTimeString("fr-FR", { hour:"2-digit", minute:"2-digit" });
+return new Date(str).toLocaleTimeString(“fr-FR”, { hour:“2-digit”, minute:“2-digit” });
 }
 function getAdresseSansCP(adresse) {
-  return String(adresse||"").replace(/\s+\d{5}\s+.+$/i, "");
+return String(adresse||””).replace(/\s+\d{5}\s+.+$/i, “”);
 }
 function getCodePostalVille(adresse) {
-  const m = String(adresse||"").match(/(\d{5})\s+(.+)$/);
-  return m ? `${m[1]} ${m[2]}` : "";
+const m = String(adresse||””).match(/(\d{5})\s+(.+)$/);
+return m ? `${m[1]} ${m[2]}` : “”;
 }
 function escapeJs(v) {
-  return String(v||"").replace(/\\/g,"\\\\").replace(/'/g,"\\'").replace(/"/g,"&quot;");
+return String(v||””).replace(/\/g,”\\”).replace(/’/g,”\’”).replace(/”/g,”"”);
 }
 function safe(v) {
-  return String(v||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+return String(v||””).replace(/&/g,”&”).replace(/</g,”<”).replace(/>/g,”>”);
 }
 
 loadData();
 </script>
+
 </body>
 </html>

@@ -440,16 +440,14 @@ textarea {
 </div>
 
 <div class="backdrop" id="backdrop">
-  <div class="sheet">
+  <div class="sheet" onclick="event.stopPropagation()">
     <div class="sheet-card">
       <div class="sheet-info">
         <div class="sheet-name" id="sname"></div>
         <div class="sheet-sub" id="ssub"></div>
       </div>
       <div id="sheetButtons"></div>
-    </div>
-    <div class="sheet-card">
-      <button class="sbtn" onclick="closeSheet()">Retour</button>
+      <button type="button" class="sbtn" onclick="closeSheet()">Retour</button>
     </div>
   </div>
 </div>

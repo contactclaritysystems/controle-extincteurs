@@ -589,9 +589,15 @@ function openDetail(id) {
   if (selectedItem) renderDetail(selectedItem);
 }
 
-function openHistoryDetail(id) {
-  selectedItem = hist.find(i => String(i.id) === String(id));
-  if (selectedItem) renderHistoryDetail(selectedItem);
+function openHistoryDetailByIndex(index) {
+  const sorted = [...hist].sort((a,b) => new Date(b.date)-new Date(a.date));
+  selectedItem = sorted[index];
+
+  if (selectedItem) {
+    renderHistoryDetail(selectedItem);
+  } else {
+    toast("Impossible d’ouvrir cet historique");
+  }
 }
 
 function renderDetail(item) {

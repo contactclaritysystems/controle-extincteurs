@@ -496,7 +496,7 @@ function render() {
   const c = document.getElementById("content");
   c.innerHTML = "";
 
-  if (selectedItem) {
+  if (selectedItem && currentTab !== "history") {
     renderDetail(selectedItem);
     return;
   }
@@ -554,7 +554,7 @@ function render() {
 
     sorted.forEach(item => {
       c.innerHTML += `
-        <div class="card ok">
+        <div class="card ok" onclick="openHistoryDetail('${escapeJs(item.id)}')">
           <div class="icon">✅</div>
           <div class="info">
             <div class="cname">${safe([item.entreprise, item.name].filter(Boolean).join(" · "))}</div>
@@ -562,6 +562,7 @@ function render() {
             <div class="cdate">${safe(getAdresseSansCP(item.adresse))}</div>
             <div class="cdate">${safe(getCodePostalVille(item.adresse))}</div>
           </div>
+          <div class="chev">›</div>
         </div>`;
     });
   }
@@ -585,7 +586,12 @@ function listCard(item, idx, cls) {
 
 function openDetail(id) {
   selectedItem = items.find(i => String(i.id) === String(id));
-  if (selectedItem) render();
+  if (selectedItem) renderDetail(selectedItem);
+}
+
+function openHistoryDetail(id) {
+  selectedItem = hist.find(i => String(i.id) === String(id));
+  if (selectedItem) renderHistoryDetail(selectedItem);
 }
 
 function renderDetail(item) {
@@ -678,6 +684,62 @@ function renderDetail(item) {
         Annuler
       </button>
     </div>`;
+}
+
+function renderHistoryDetail(item) {
+  hideMainBars();
+
+  const phone = item.telephone || item.tel || item.phone || "";
+  const hasPhone = String(phone).trim().length > 0;
+
+  const rapportUrl = item.rapport_pdf_url || item.rapport_url || "";
+  const factureUrl = item.facture_pdf_url || item.facture_url || "";
+
+  document.getElementById("content").innerHTML = `
+    <div class="detail-top">
+      <div class="back" onclick="backToList()">‹ Retour</div>
+      <div class="detail-title">Historique</div>
+      <div class="detail-sub">Intervention terminée</div>
+    </div>
+
+    <div class="main-intervention">
+      <div class="icon">✅</div>
+      <div class="info">
+        <div class="main-title">${safe(item.entreprise || item.name || "Client")}</div>
+        <div class="main-line">${safe(item.name || "")}</div>
+        <div class="main-line">${safe(getAdresseSansCP(item.adresse))}</div>
+        <div class="main-line">${safe(getCodePostalVille(item.adresse))}</div>
+        <div class="main-line main-date">${fmtDate(item.date)} · ${fmtHeure(item.date)}</div>
+        <div class="main-line">Intervention clôturée</div>
+      </div>
+    </div>
+
+    <div class="action-grid">
+      <button class="action ${hasPhone ? "" : "disabled"}" onclick="${hasPhone ? `callClient('${escapeJs(phone)}')` : `toast('Téléphone non renseigné')`}">
+        <div class="action-ico">📞</div><span>Appeler</span>
+      </button>
+
+      <button class="action" onclick="openMaps('${escapeJs(item.adresse || "")}')">
+        <div class="action-ico">🧭</div><span>Itinéraire</span>
+      </button>
+
+      <button class="action" onclick="${rapportUrl ? `window.open('${escapeJs(rapportUrl)}','_blank')` : `toast('Rapport non disponible')`}">
+        <div class="action-ico">📋</div><span>Voir rapport</span>
+      </button>
+
+      <button class="action" onclick="${factureUrl ? `window.open('${escapeJs(factureUrl)}','_blank')` : `toast('Facture non disponible')`}">
+        <div class="action-ico">💶</div><span>Voir facture</span>
+      </button>
+
+      <button class="action" onclick="toast('Renvoi bientôt connecté à Make')">
+        <div class="action-ico">📤</div><span>Renvoyer</span>
+      </button>
+
+      <button class="action" onclick="openRescheduleSheet('${escapeJs(item.id)}', '${escapeJs(item.name || item.entreprise || "Client")}')">
+        <div class="action-ico">📅</div><span>Reprogrammer</span>
+      </button>
+    </div>
+  `;
 }
 
 function backToList() {

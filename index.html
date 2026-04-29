@@ -483,9 +483,7 @@ document.querySelectorAll(".tab").forEach(t => {
   });
 });
 
-document.getElementById("backdrop").addEventListener("click", e => {
-  if (e.target.id === "backdrop") closeSheet();
-});
+document.getElementById("backdrop").addEventListener("click", closeSheet);
 
 async function loadData() {
   showLoader();

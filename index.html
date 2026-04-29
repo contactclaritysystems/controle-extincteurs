@@ -552,19 +552,19 @@ function render() {
 
     c.innerHTML += `<div class="slabel">Terminées</div>`;
 
-    sorted.forEach(item => {
-      c.innerHTML += `
-        <div class="card ok" onclick="openHistoryDetail('${escapeJs(item.id)}')">
-          <div class="icon">✅</div>
-          <div class="info">
-            <div class="cname">${safe([item.entreprise, item.name].filter(Boolean).join(" · "))}</div>
-            <div class="cdate">${fmtDate(item.date)} · ${fmtHeure(item.date)}</div>
-            <div class="cdate">${safe(getAdresseSansCP(item.adresse))}</div>
-            <div class="cdate">${safe(getCodePostalVille(item.adresse))}</div>
-          </div>
-          <div class="chev">›</div>
-        </div>`;
-    });
+    sorted.forEach((item, i) => {
+  c.innerHTML += `
+    <div class="card ok" onclick="openHistoryDetailByIndex(${i})">
+      <div class="icon">✅</div>
+      <div class="info">
+        <div class="cname">${safe([item.entreprise, item.name].filter(Boolean).join(" · "))}</div>
+        <div class="cdate">${fmtDate(item.date)} · ${fmtHeure(item.date)}</div>
+        <div class="cdate">${safe(getAdresseSansCP(item.adresse))}</div>
+        <div class="cdate">${safe(getCodePostalVille(item.adresse))}</div>
+      </div>
+      <div class="chev">›</div>
+    </div>`;
+});
   }
 }
 

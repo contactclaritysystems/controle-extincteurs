@@ -4,923 +4,374 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Clarity Systems</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --accent:#0A84FF;
-  --danger:#FF3B30;
-  --warning:#FF9500;
-  --success:#30D158;
-  --bg:#F2F2F7;
-  --surface:#FFFFFF;
-  --label:#000000;
-  --label2:rgba(60,60,67,0.75);
-  --label3:rgba(60,60,67,0.55);
-  --sep:rgba(60,60,67,0.12);
+body {
+  margin:0;
+  font-family:'DM Sans', sans-serif;
+  background:#F2F2F7;
 }
 
-html, body {
-  height:100%;
-  background:var(--bg);
-  font-family:'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-#wrap {
-  display:flex;
-  justify-content:center;
-  min-height:100vh;
-}
-
-#app {
-  width:100%;
-  max-width:430px;
-  background:var(--bg);
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
-}
-
-/* HEADER */
 .hdr {
   background:#fff;
-  padding:16px 18px 10px;
-  border-bottom:1px solid var(--sep);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
+  padding:16px;
+  text-align:center;
 }
 
-.logo { height:80px; width:auto; max-width:180px; object-fit:contain; }
+.logo { height:60px; }
 
-.badge {
-  background:rgba(255,59,48,0.12);
-  color:var(--danger);
-  font-size:12px;
-  font-weight:700;
-  padding:4px 10px;
-  border-radius:20px;
-  display:none;
-  white-space:nowrap;
-}
-
-.badge.on { display:block; }
-
-/* TABS */
 .tabs {
   display:flex;
   background:#fff;
-  border-bottom:1px solid var(--sep);
 }
 
 .tab {
   flex:1;
-  padding:13px 4px;
   text-align:center;
-  font-size:13px;
-  font-weight:600;
-  color:var(--label3);
-  cursor:pointer;
-  position:relative;
-  user-select:none;
-  -webkit-tap-highlight-color:transparent;
-}
-
-.tab.active { color:var(--accent); }
-
-.tab.active::after {
-  content:'';
-  position:absolute;
-  bottom:-1px;
-  left:16px;
-  right:16px;
-  height:2.5px;
-  background:var(--accent);
-  border-radius:2px 2px 0 0;
-}
-
-/* CONTENT */
-#content {
-  flex:1;
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
-  padding:14px;
-  background:var(--bg);
-}
-
-.slabel {
-  font-size:11px;
+  padding:12px;
   font-weight:700;
-  letter-spacing:.07em;
-  text-transform:uppercase;
-  color:var(--label3);
-  padding:4px 2px 10px;
+  color:#999;
 }
 
-/* LIST CARD */
+.tab.active { color:#0A84FF; }
+
+#content { padding:14px; }
+
+/* CARDS */
 .card {
   background:#fff;
-  border-radius:18px;
   padding:14px;
+  border-radius:14px;
   margin-bottom:10px;
   display:flex;
-  align-items:center;
-  gap:12px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.07);
-  position:relative;
-  overflow:hidden;
+  justify-content:space-between;
   cursor:pointer;
-  animation:fadeUp .2s ease both;
 }
 
-.card::before {
-  content:'';
-  position:absolute;
-  left:0;
-  top:0;
-  bottom:0;
-  width:4px;
-}
+.cname { font-weight:700; }
+.cdate { font-size:13px; color:#666; }
 
-.card.red::before { background:var(--danger); }
-.card.orange::before { background:var(--warning); }
-.card.ok::before { background:var(--success); }
-
-.icon {
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:20px;
-  flex-shrink:0;
-  background:rgba(10,132,255,0.10);
-}
-
-.card.red .icon { background:rgba(255,59,48,0.10); }
-.card.orange .icon { background:rgba(255,149,0,0.10); }
-.card.ok .icon { background:rgba(48,209,88,0.10); }
-
-.info { flex:1; min-width:0; }
-
-.cname {
-  font-size:16px;
-  font-weight:700;
-  color:var(--label);
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  line-height:1.2;
-  margin-bottom:4px;
-}
-
-.cdate {
-  font-size:13px;
-  font-weight:500;
-  color:var(--label3);
-  line-height:1.35;
-}
-
-.card.red .cdate { color:var(--danger); }
-.card.orange .cdate { color:var(--warning); }
-
-.chev {
-  font-size:26px;
-  color:var(--label3);
-  padding-left:4px;
-}
-
-/* DETAIL PAGE */
+/* DETAIL */
 .detail-top {
   background:#fff;
-  margin:-14px -14px 18px;
-  padding:16px 18px 18px;
-  border-bottom:1px solid var(--sep);
+  padding:14px;
+  margin:-14px -14px 14px;
 }
 
 .back {
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  color:var(--accent);
-  font-size:15px;
+  color:#0A84FF;
   font-weight:800;
-  margin-bottom:14px;
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-}
-
-.detail-brand {
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-
-.detail-logo {
-  width:58px;
-  height:58px;
-  object-fit:contain;
-}
-
-.detail-title {
-  font-size:26px;
-  font-weight:800;
-  color:var(--label);
-  letter-spacing:-.02em;
-}
-
-.detail-sub {
-  font-size:13px;
-  color:var(--label3);
-  font-weight:700;
-  margin-top:2px;
-}
-
-.next-label {
-  font-size:12px;
-  font-weight:800;
-  color:var(--label3);
-  letter-spacing:.07em;
-  text-transform:uppercase;
   margin-bottom:10px;
+  cursor:pointer;
 }
 
 .main-intervention {
-  background:white;
-  border-radius:18px;
-  padding:16px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.07);
-  display:flex;
-  gap:12px;
+  background:#fff;
+  padding:14px;
+  border-radius:14px;
   margin-bottom:14px;
 }
 
-.main-intervention .icon {
-  background:rgba(10,132,255,0.10);
-}
-
-.main-title {
-  font-size:18px;
-  font-weight:800;
-  color:var(--label);
-  margin-bottom:6px;
-}
-
-.main-line {
-  font-size:14px;
-  color:var(--label2);
-  line-height:1.45;
-}
-
-.main-date {
-  color:var(--warning);
-  font-weight:800;
-  margin-top:8px;
-}
-
-.main-date.late { color:var(--danger); }
-.main-date.future { color:var(--success); }
-
 .action-grid {
   display:grid;
-  grid-template-columns:repeat(3, 1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:10px;
-  margin-bottom:16px;
 }
 
 .action {
-  background:white;
-  border:none;
-  border-radius:16px;
-  min-height:96px;
-  padding:12px 6px;
-  font-family:inherit;
-  box-shadow:0 2px 8px rgba(0,0,0,0.06);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-}
-
-.action:active { transform:scale(.97); }
-
-.action-ico {
-  font-size:30px;
-  line-height:1;
-}
-
-.action span {
-  font-size:13px;
-  font-weight:800;
-  color:var(--label);
-}
-
-.action.disabled {
-  opacity:.45;
-  cursor:not-allowed;
+  background:#fff;
+  padding:12px;
+  border-radius:12px;
+  text-align:center;
+  font-weight:700;
 }
 
 .bottom-actions {
   display:flex;
   flex-direction:column;
   gap:10px;
-  padding-bottom:18px;
-}
-
-.primary-btn,
-.secondary-btn,
-.danger-btn {
-  width:100%;
-  border:none;
-  border-radius:16px;
-  font-family:inherit;
-  font-size:16px;
-  font-weight:800;
-  padding:16px;
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
+  margin-top:14px;
 }
 
 .primary-btn {
-  background:var(--accent);
-  color:white;
+  background:#0A84FF;
+  color:#fff;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  font-weight:800;
 }
 
 .secondary-btn {
-  background:white;
-  color:var(--accent);
-  border:1px solid rgba(10,132,255,0.18);
+  background:#fff;
+  color:#0A84FF;
+  border:1px solid rgba(10,132,255,0.3);
+  padding:14px;
+  border-radius:12px;
+  font-weight:800;
 }
 
 .danger-btn {
-  background:white;
-  color:var(--danger);
-  border:1px solid rgba(255,59,48,0.18);
+  background:#fff;
+  color:#FF3B30;
+  border:1px solid rgba(255,59,48,0.3);
+  padding:14px;
+  border-radius:12px;
+  font-weight:800;
 }
 
-.primary-btn:active,
-.secondary-btn:active,
-.danger-btn:active {
-  transform:scale(.98);
-}
-
-/* EMPTY */
-.empty {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:10px;
-  padding:72px 32px;
-  animation:fadeUp .3s ease;
-}
-
-.empty-ico { font-size:46px; }
-.empty-title { font-size:17px; font-weight:700; color:var(--label); }
-.empty-sub { font-size:13px; color:var(--label3); text-align:center; }
-
-/* LOADER */
-.loader { display:flex; justify-content:center; padding:70px; }
-
-.spinner {
-  width:28px;
-  height:28px;
-  border:3px solid var(--sep);
-  border-top-color:var(--accent);
-  border-radius:50%;
-  animation:spin .7s linear infinite;
-}
-
-/* ACTION SHEET */
+/* POPUP */
 .backdrop {
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.35);
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  z-index:100;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .22s ease;
-  backdrop-filter:blur(4px);
-  -webkit-backdrop-filter:blur(4px);
+  background:rgba(0,0,0,0.4);
+  display:none;
+  justify-content:flex-end;
+  flex-direction:column;
 }
 
-.backdrop.open { opacity:1; pointer-events:all; }
+.backdrop.open { display:flex; }
 
 .sheet {
-  width:100%;
-  max-width:430px;
-  padding:0 10px 28px;
-  transform:translateY(100%);
-  transition:transform .3s cubic-bezier(.32,.72,0,1);
-}
-
-.backdrop.open .sheet { transform:translateY(0); }
-
-.sheet-card {
-  background:rgba(250,250,250,0.97);
-  border-radius:16px;
-  overflow:hidden;
-  margin-bottom:8px;
-}
-
-.sheet-info {
+  background:#fff;
   padding:16px;
-  text-align:center;
-  border-bottom:1px solid var(--sep);
+  border-radius:16px 16px 0 0;
 }
-
-.sheet-name { font-size:16px; font-weight:800; color:var(--label); }
-.sheet-sub { font-size:13px; color:var(--label3); margin-top:3px; }
 
 .sbtn {
   width:100%;
-  padding:16px;
-  background:transparent;
+  padding:14px;
   border:none;
-  font-family:inherit;
-  font-size:17px;
+  background:#fff;
   font-weight:700;
-  cursor:pointer;
 }
 
-.sbtn + .sbtn { border-top:1px solid var(--sep); }
-.sbtn.confirm { color:var(--accent); }
-.sbtn.warn { color:var(--warning); }
-.sbtn.danger { color:var(--danger); }
+.sbtn.confirm { color:#0A84FF; }
+.sbtn.warn { color:#FF9500; }
+.sbtn.danger { color:#FF3B30; }
 
-.sheet-cancel {
-  background:rgba(250,250,250,0.97);
-  border-radius:16px;
-  overflow:hidden;
-}
-
-.sbtn.cancel { color:var(--label); }
-
-/* TOAST */
-.toast {
-  position:fixed;
-  left:50%;
-  bottom:30px;
-  transform:translateX(-50%) translateY(10px);
-  background:rgba(28,28,28,0.88);
-  color:#fff;
-  padding:11px 18px;
-  border-radius:14px;
-  font-size:14px;
-  font-weight:600;
-  white-space:nowrap;
-  z-index:999;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .2s, transform .2s;
-  backdrop-filter:blur(12px);
-}
-
-.toast.show {
-  opacity:1;
-  transform:translateX(-50%) translateY(0);
-}
-
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(8px); }
-  to { opacity:1; transform:translateY(0); }
-}
-
-@keyframes spin {
-  to { transform:rotate(360deg); }
+textarea {
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #ccc;
 }
 </style>
 </head>
+
 <body>
 
-<div id="wrap">
-  <div id="app">
-
-    <div class="hdr" id="mainHeader">
-      <img src="https://i.imgur.com/1ZFTLIo.png" class="logo" alt="Clarity Systems">
-      <span class="badge" id="badge"></span>
-    </div>
-
-    <div class="tabs" id="tabs">
-      <div class="tab active" data-tab="today">Aujourd'hui</div>
-      <div class="tab" data-tab="planning">Planning</div>
-      <div class="tab" data-tab="history">Historique</div>
-    </div>
-
-    <div id="content"></div>
-
-  </div>
+<div class="hdr">
+  <img src="https://i.imgur.com/1ZFTLIo.png" class="logo">
 </div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('today')">Aujourd'hui</div>
+  <div class="tab" onclick="switchTab('planning')">Planning</div>
+</div>
+
+<div id="content"></div>
 
 <div class="backdrop" id="backdrop">
   <div class="sheet">
-    <div class="sheet-card">
-      <div class="sheet-info">
-        <div class="sheet-name" id="sname"></div>
-        <div class="sheet-sub" id="ssub"></div>
-      </div>
-      <div id="sheetButtons"></div>
-    </div>
-    <div class="sheet-cancel">
-      <button class="sbtn cancel" onclick="closeSheet()">Retour</button>
-    </div>
+    <div id="sheetContent"></div>
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
-
 <script>
-const GET_URL  = "https://hook.eu1.make.com/wfp9dc520ic15yvl7u4lx6v1oyuhlckn";
-const POST_URL = "https://hook.eu1.make.com/v2at1keat2dqxxf2jza4tnxp3m3a2g35";
-const HIST_URL = "https://hook.eu1.make.com/6etkl3pphxxwmly0jha93m246am0d2n8";
-
-let items = [], hist = [], currentTab = "today", selectedItem = null, pendingId = null;
-
-/* TABS */
-document.querySelectorAll(".tab").forEach(t =>
-  t.addEventListener("click", () => {
-    selectedItem = null;
-    document.getElementById("tabs").style.display = "flex";
-    document.getElementById("mainHeader").style.display = "flex";
-
-    document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
-    t.classList.add("active");
-    currentTab = t.dataset.tab;
-    render();
-  })
-);
 
 /* DATA */
-async function loadData() {
-  showLoader();
-  try { items = await (await fetch(GET_URL)).json(); } catch { items = []; }
-  try { hist = await (await fetch(HIST_URL)).json(); } catch { hist = []; }
-  updateBadge();
+let currentTab = "today";
+let selectedItem = null;
+
+/* REPORT */
+let reportLines = [];
+let tempLine = {};
+let step = 1;
+
+/* NAV */
+function switchTab(tab){
+  currentTab = tab;
+  selectedItem = null;
   render();
 }
 
-function midnight(d) {
-  const x = new Date(d);
-  x.setHours(0,0,0,0);
-  return x;
-}
-
-function updateBadge() {
-  const today = midnight(new Date());
-  const n = items.filter(i => midnight(i.date) < today).length;
-  const b = document.getElementById("badge");
-  b.textContent = n + " en retard";
-  b.classList.toggle("on", n > 0);
-}
-
 /* RENDER */
-function showLoader() {
-  document.getElementById("content").innerHTML =
-    '<div class="loader"><div class="spinner"></div></div>';
-}
-
-function render() {
+function render(){
   const c = document.getElementById("content");
   c.innerHTML = "";
 
-  if (selectedItem) {
+  if(selectedItem){
     renderDetail(selectedItem);
     return;
   }
 
-  document.getElementById("tabs").style.display = "flex";
-  document.getElementById("mainHeader").style.display = "flex";
+  const data = [
+    {id:1, name:"Client A", date:"Aujourd'hui"},
+    {id:2, name:"Client B", date:"Demain"}
+  ];
 
-  const today = midnight(new Date());
-
-  if (currentTab === "today") {
-    const all = items.filter(i => midnight(i.date) <= today);
-
-    if (!all.length) {
-      c.innerHTML = empty("✅", "Aucune intervention aujourd'hui", "Le planning est à jour.");
-      return;
-    }
-
-    const late = all.filter(i => midnight(i.date) < today);
-    const todayL = all.filter(i => midnight(i.date).getTime() === today.getTime());
-
-    if (late.length) {
-      c.innerHTML += '<div class="slabel">En retard</div>';
-      late.forEach((item, i) => c.innerHTML += listCard(item, i, "red"));
-    }
-
-    if (todayL.length) {
-      c.innerHTML += '<div class="slabel">Aujourd’hui</div>';
-      todayL.forEach((item, i) => c.innerHTML += listCard(item, i, "orange"));
-    }
-
-  } else if (currentTab === "planning") {
-    const sorted = [...items].sort((a,b) => new Date(a.date)-new Date(b.date));
-
-    if (!sorted.length) {
-      c.innerHTML = empty("📅", "Planning vide", "Aucune intervention planifiée.");
-      return;
-    }
-
-    c.innerHTML += '<div class="slabel">Planning complet</div>';
-
-    sorted.forEach((item, i) => {
-      const d = midnight(item.date);
-      const cls = d < today ? "red" : d.getTime() === today.getTime() ? "orange" : "ok";
-      c.innerHTML += listCard(item, i, cls);
-    });
-
-  } else {
-    const sorted = [...hist].sort((a,b) => new Date(b.date)-new Date(a.date));
-
-    if (!sorted.length) {
-      c.innerHTML = empty("🗂️", "Aucun historique", "Les interventions terminées apparaîtront ici.");
-      return;
-    }
-
-    c.innerHTML += '<div class="slabel">Terminées</div>';
-
-    sorted.forEach((item, i) => {
-      c.innerHTML += `<div class="card ok" style="animation-delay:${i*.04}s">
-        <div class="icon">✅</div>
-        <div class="info">
-          <div class="cname">${[item.entreprise, item.name].filter(Boolean).join(" · ")}</div>
-          <div class="cdate">${fmtDate(item.date)} · ${fmtHeure(item.date)}</div>
-          <div class="cdate">${getAdresseSansCP(item.adresse)}</div>
-          <div class="cdate">${getCodePostalVille(item.adresse)}</div>
-        </div>
-      </div>`;
-    });
-  }
-}
-
-function listCard(item, idx, cls) {
-  const ico = cls === "red" ? "⚠️" : cls === "orange" ? "📅" : "📋";
-
-  return `<div class="card ${cls}" id="card-${item.id}" style="animation-delay:${idx*.04}s" onclick="openDetail('${item.id}')">
-    <div class="icon">${ico}</div>
-    <div class="info">
-      <div class="cname">${item.entreprise || ""} · ${item.name || ""}</div>
-      <div class="cdate">${fmtDate(item.date)} · ${fmtHeure(item.date)}</div>
-      <div class="cdate">${getAdresseSansCP(item.adresse)}</div>
-      <div class="cdate">${getCodePostalVille(item.adresse)}</div>
-    </div>
-    <div class="chev">›</div>
-  </div>`;
-}
-
-function renderDetail(item) {
-  const c = document.getElementById("content");
-
-  document.getElementById("tabs").style.display = "none";
-  document.getElementById("mainHeader").style.display = "none";
-
-  const today = midnight(new Date());
-  const d = midnight(item.date);
-  const isLate = d < today;
-  const isToday = d.getTime() === today.getTime();
-  const isFuture = d > today;
-
-  const phone = item.telephone || item.tel || item.phone || "";
-  const hasPhone = String(phone).trim().length > 0;
-
-  const dateClass = isLate ? "late" : isFuture ? "future" : "";
-  const statusText = isLate ? "Intervention en retard" : isFuture ? "Intervention planifiée" : "Intervention du jour";
-
-  const closeButton = !isFuture ? `
-    <button class="primary-btn" onclick="openCloseSheet('${item.id}', '${escapeJs(item.name || item.entreprise || "Client")}')">
-      Clôturer l’intervention
-    </button>
-  ` : "";
-
-  c.innerHTML = `
-    <div class="detail-top">
-      <div class="back" onclick="backToList()">‹ Retour</div>
-      <div class="detail-brand">
-        <img src="https://i.imgur.com/1ZFTLIo.png" class="detail-logo" alt="Logo">
+  data.forEach(item=>{
+    c.innerHTML += `
+      <div class="card" onclick="openDetail(${item.id})">
         <div>
-          <div class="detail-title">Intervention</div>
-          <div class="detail-sub">${statusText}</div>
+          <div class="cname">${item.name}</div>
+          <div class="cdate">${item.date}</div>
         </div>
+        <div>›</div>
       </div>
-    </div>
+    `;
+  });
+}
 
-    <div class="next-label">Fiche intervention</div>
+/* DETAIL */
+function openDetail(id){
+  selectedItem = {id:id, name:"Client "+id};
+  render();
+}
+
+function renderDetail(item){
+  const isPlanning = currentTab === "planning";
+
+  document.getElementById("content").innerHTML = `
+    <div class="detail-top">
+      <div class="back" onclick="selectedItem=null;render()">‹ Retour</div>
+      <strong>Intervention</strong>
+    </div>
 
     <div class="main-intervention">
-      <div class="icon">📅</div>
-      <div class="info">
-        <div class="main-title">${item.entreprise || item.name || "Client"}</div>
-        <div class="main-line">${item.name || ""}</div>
-        <div class="main-line">${getAdresseSansCP(item.adresse)}</div>
-        <div class="main-line">${getCodePostalVille(item.adresse)}</div>
-        <div class="main-line main-date ${dateClass}">${fmtDate(item.date)} · ${fmtHeure(item.date)}</div>
-      </div>
+      ${item.name}
     </div>
 
     <div class="action-grid">
-      <button class="action ${hasPhone ? "" : "disabled"}" onclick="${hasPhone ? `callClient('${escapeJs(phone)}')` : `toast('Téléphone non renseigné')`}">
-        <div class="action-ico">📞</div>
-        <span>Appeler</span>
-      </button>
-
-      <button class="action" onclick="openMaps('${escapeJs(item.adresse || "")}')">
-        <div class="action-ico">🧭</div>
-        <span>Itinéraire</span>
-      </button>
-
-      <button class="action" onclick="toast('Infos client bientôt disponibles')">
-        <div class="action-ico">👤</div>
-        <span>Infos client</span>
-      </button>
-
-      <button class="action" onclick="toast('Documents bientôt disponibles')">
-        <div class="action-ico">📄</div>
-        <span>Documents</span>
-      </button>
-
-      <button class="action" onclick="toast('Rapport bientôt disponible')">
-        <div class="action-ico">📋</div>
-        <span>Rapport</span>
-      </button>
-
-      <button class="action" onclick="toast('Facture bientôt disponible')">
-        <div class="action-ico">💶</div>
-        <span>Facture</span>
-      </button>
+      <div class="action">📞</div>
+      <div class="action">🧭</div>
+      <div class="action">👤</div>
+      <div class="action">📄</div>
+      <div class="action" onclick="openReport()">📋</div>
+      <div class="action">💶</div>
     </div>
 
     <div class="bottom-actions">
-      ${closeButton}
-
-      <button class="secondary-btn" onclick="openReportSheet('${item.id}', '${escapeJs(item.name || item.entreprise || "Client")}')">
-        Reporter
-      </button>
-
-      <button class="danger-btn" onclick="openCancelSheet('${item.id}', '${escapeJs(item.name || item.entreprise || "Client")}')">
-        Annuler
-      </button>
+      ${!isPlanning ? `<button class="primary-btn" onclick="alert('Clôturé')">Clôturer</button>` : ``}
+      <button class="secondary-btn" onclick="openReport()">Reporter</button>
+      <button class="danger-btn" onclick="openCancel()">Annuler</button>
     </div>
   `;
 }
 
-function openDetail(id) {
-  selectedItem = items.find(i => String(i.id) === String(id));
-  if (selectedItem) render();
+/* REPORT */
+function openReport(){
+  renderReport();
 }
 
-function backToList() {
-  selectedItem = null;
-  document.getElementById("tabs").style.display = "flex";
-  document.getElementById("mainHeader").style.display = "flex";
-  render();
+function renderReport(){
+  const c = document.getElementById("content");
+
+  c.innerHTML = `
+    <div class="detail-top">
+      <div class="back" onclick="render()">‹ Retour</div>
+      <strong>Rapport</strong>
+    </div>
+
+    ${reportLines.map(l=>`
+      <div class="card">
+        <div>
+          <div class="cname">${l.equipement} - ${l.action}</div>
+          <div class="cdate">${l.resultat}</div>
+          ${l.commentaire ? `<div class="cdate">${l.commentaire}</div>` : ""}
+        </div>
+      </div>
+    `).join("")}
+
+    <button class="secondary-btn" onclick="startLine()">+ Ajouter une tâche</button>
+
+    <div class="bottom-actions">
+      <button class="primary-btn" onclick="validateReport()">Clôturer rapport</button>
+    </div>
+  `;
 }
 
-function empty(ico, title, sub = "") {
-  return `<div class="empty">
-    <div class="empty-ico">${ico}</div>
-    <div class="empty-title">${title}</div>
-    <div class="empty-sub">${sub}</div>
-  </div>`;
+function startLine(){
+  tempLine = {};
+  step = 1;
+  renderStep();
 }
 
-/* SHEETS */
-function openSheet(name, sub, buttonsHtml) {
-  document.getElementById("sname").textContent = name;
-  document.getElementById("ssub").textContent = sub;
-  document.getElementById("sheetButtons").innerHTML = buttonsHtml;
-  document.getElementById("backdrop").classList.add("open");
-}
+function renderStep(){
+  const c = document.getElementById("content");
 
-function closeSheet() {
-  document.getElementById("backdrop").classList.remove("open");
-}
+  if(step===1){
+    c.innerHTML = stepTemplate("Équipement",["Extincteur","BAES","Alarme"],"equipement");
+  }
+  if(step===2){
+    c.innerHTML = stepTemplate("Action",["Vérification","Maintenance","Remplacement"],"action");
+  }
+  if(step===3){
+    c.innerHTML = stepTemplate("Résultat",["Conforme","Non conforme","À remplacer"],"resultat");
+  }
+  if(step===4){
+    c.innerHTML = `
+      <div class="detail-top">
+        <div class="back" onclick="step=3;renderStep()">‹ Retour</div>
+        <strong>Commentaire</strong>
+      </div>
 
-function openCloseSheet(id, name) {
-  pendingId = id;
-  openSheet(
-    name,
-    "Clôturer cette intervention ?",
-    `<button class="sbtn confirm" onclick="confirmClose()">✓ Clôturer l’intervention</button>`
-  );
-}
+      <textarea id="comment"></textarea>
 
-function openReportSheet(id, name) {
-  pendingId = id;
-  openSheet(
-    name,
-    "Envoyer un lien de reprogrammation au client ?",
-    `<button class="sbtn confirm" onclick="fakeAction('reporter')">Envoyer le lien de RDV</button>`
-  );
-}
-
-function openCancelSheet(id, name) {
-  pendingId = id;
-  openSheet(
-    name,
-    "Que voulez-vous faire ?",
-    `<button class="sbtn warn" onclick="fakeAction('annuler_reprogrammer')">Annuler et reprogrammer</button>
-     <button class="sbtn danger" onclick="fakeAction('annuler_definitif')">Annuler définitivement</button>`
-  );
-}
-
-async function confirmClose() {
-  try {
-    await fetch(POST_URL, {
-      method:"POST",
-      headers:{ "Content-Type":"application/json" },
-      body:JSON.stringify({ id:pendingId })
-    });
-  } catch {}
-
-  closeSheet();
-  toast("✅ Intervention clôturée");
-  selectedItem = null;
-
-  setTimeout(() => {
-    document.getElementById("tabs").style.display = "flex";
-    document.getElementById("mainHeader").style.display = "flex";
-    loadData();
-  }, 420);
-}
-
-function fakeAction(action) {
-  closeSheet();
-
-  if (action === "reporter") {
-    toast("Lien de RDV bientôt connecté à Make");
-  } else if (action === "annuler_reprogrammer") {
-    toast("Annulation + reprogrammation bientôt connectées");
-  } else {
-    toast("Annulation définitive bientôt connectée");
+      <button class="primary-btn" onclick="saveLine()">Ajouter</button>
+    `;
   }
 }
 
-/* ACTIONS */
-function callClient(phone) {
-  window.location.href = "tel:" + phone;
+function stepTemplate(title, options, key){
+  return `
+    <div class="detail-top">
+      <div class="back" onclick="step--;renderStep()">‹ Retour</div>
+      <strong>${title}</strong>
+    </div>
+
+    <div class="action-grid">
+      ${options.map(o=>`<div class="action" onclick="select('${key}','${o}')">${o}</div>`).join("")}
+    </div>
+  `;
 }
 
-function openMaps(adresse) {
-  const url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(adresse);
-  window.open(url, "_blank");
+function select(key,value){
+  tempLine[key]=value;
+  step++;
+  renderStep();
 }
 
-/* TOAST */
-let tt;
-function toast(msg) {
-  const el = document.getElementById("toast");
-  el.textContent = msg;
-  el.classList.add("show");
-  clearTimeout(tt);
-  tt = setTimeout(() => el.classList.remove("show"), 2200);
+function saveLine(){
+  tempLine.commentaire=document.getElementById("comment").value;
+  reportLines.push(tempLine);
+  renderReport();
 }
 
-/* UTILS */
-function fmtDate(str) {
-  const d = new Date(str);
-  const s = d.toLocaleDateString("fr-FR", {
-    weekday:"long",
-    day:"numeric",
-    month:"long"
-  });
-  return s.charAt(0).toUpperCase() + s.slice(1);
+function validateReport(){
+  if(reportLines.length===0){
+    alert("Ajoute une tâche");
+    return;
+  }
+  alert("Rapport validé");
+  render();
 }
 
-function fmtHeure(str) {
-  return new Date(str).toLocaleTimeString("fr-FR", {
-    hour:"2-digit",
-    minute:"2-digit"
-  });
+/* POPUP */
+function openCancel(){
+  document.getElementById("sheetContent").innerHTML = `
+    <button class="sbtn warn">Annuler + reprogrammer</button>
+    <button class="sbtn danger">Annuler définitivement</button>
+  `;
+  document.getElementById("backdrop").classList.add("open");
 }
 
-function getAdresseSansCP(adresse) {
-  const str = String(adresse || "");
-  return str.replace(/\s+\d{5}\s+.+$/i, "");
-}
+/* INIT */
+render();
 
-function getCodePostalVille(adresse) {
-  const str = String(adresse || "");
-  const match = str.match(/(\d{5})\s+(.+)$/);
-  return match ? `${match[1]} ${match[2]}` : "";
-}
-
-function escapeJs(value) {
-  return String(value || "")
-    .replace(/\\/g, "\\\\")
-    .replace(/'/g, "\\'")
-    .replace(/"/g, "&quot;");
-}
-
-loadData();
 </script>
+
 </body>
 </html>

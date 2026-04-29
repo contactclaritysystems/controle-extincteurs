@@ -932,6 +932,8 @@ function openSheet(name, sub, buttonsHtml) {
 
 function closeSheet() {
   document.getElementById("backdrop").classList.remove("open");
+  document.getElementById("sheetButtons").innerHTML = "";
+  pendingId = null;
 }
 
 function showMainBars() {

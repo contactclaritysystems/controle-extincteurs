@@ -608,15 +608,33 @@ function renderDetail(item) {
   const isPlanning = currentTab === "planning";
   const isFuture = d > today;
 
+  const showWorkActions = !isPlanning && !isFuture;
+
   const phone = item.telephone || item.tel || item.phone || "";
   const hasPhone = String(phone).trim().length > 0;
 
   const lines = reportLinesById[item.id] || [];
   const reportDone = reportClosedById[item.id] === true;
 
-  const closeButton = (!isPlanning && !isFuture) ? `
+  const reportStatus = showWorkActions ? `
+    <div class="main-line">
+      ${reportDone ? "✅ Rapport clôturé" : lines.length ? "📝 Rapport en cours" : "Rapport non rempli"}
+    </div>
+  ` : "";
+
+  const closeButton = showWorkActions ? `
     <button class="primary-btn" onclick="tryCloseIntervention('${escapeJs(item.id)}')">
       Clôturer l’intervention
+    </button>
+  ` : "";
+
+  const workButtons = showWorkActions ? `
+    <button class="action" onclick="openReportPage()">
+      <div class="action-ico">📋</div><span>Rapport</span>
+    </button>
+
+    <button class="action" onclick="toast('Facture bientôt disponible')">
+      <div class="action-ico">💶</div><span>Facture</span>
     </button>
   ` : "";
 
@@ -635,7 +653,7 @@ function renderDetail(item) {
         <div class="main-line">${safe(getAdresseSansCP(item.adresse))}</div>
         <div class="main-line">${safe(getCodePostalVille(item.adresse))}</div>
         <div class="main-line main-date">${fmtDate(item.date)} · ${fmtHeure(item.date)}</div>
-        <div class="main-line">${reportDone ? "✅ Rapport clôturé" : lines.length ? "📝 Rapport en cours" : "Rapport non rempli"}</div>
+        ${reportStatus}
       </div>
     </div>
 
@@ -656,13 +674,7 @@ function renderDetail(item) {
         <div class="action-ico">📄</div><span>Documents</span>
       </button>
 
-      <button class="action" onclick="openReportPage()">
-        <div class="action-ico">📋</div><span>Rapport</span>
-      </button>
-
-      <button class="action" onclick="toast('Facture bientôt disponible')">
-        <div class="action-ico">💶</div><span>Facture</span>
-      </button>
+      ${workButtons}
     </div>
 
     <div class="bottom-actions">
